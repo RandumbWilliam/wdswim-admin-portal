@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { PageContainer, Title } from "../../styles/StyledElements";
 
-const Dashboard = () => {
+const Admin = () => {
     return (
         <PageContainer>
-            <Link to="/admin">
-                <Title>Dashboard</Title>
+            <Link to="/">
+                <Title>Admin</Title>
             </Link>
         </PageContainer>
     );
 };
 
-export default Dashboard;
+export default Admin;

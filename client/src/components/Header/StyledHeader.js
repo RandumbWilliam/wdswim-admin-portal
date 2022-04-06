@@ -1,3 +1,4 @@
+import { Container } from "semantic-ui-react";
 import styled from "styled-components";
 import {
     BOLD_FONT_WEIGHT,
@@ -5,15 +6,15 @@ import {
     WHITE_COLOR,
 } from "../../styles/StyledVariables";
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled.header`
     height: 80px;
     min-height: 80px;
-    width: 100%;
     background-color: ${WHITE_COLOR};
     box-shadow: ${BOX_SHADOW};
     display: flex;
     align-items: center;
     padding: 0 20px;
+    margin-bottom: 40px;
 `;
 
 export const HeaderTitle = styled.h1`

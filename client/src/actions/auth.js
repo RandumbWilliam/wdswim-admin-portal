@@ -1,0 +1,14 @@
+import { AUTH, ERROR } from "../constants/actionTypes";
+import * as api from "../api";
+
+export const login = (formData, navigate) => async (dispatch) => {
+    try {
+        const { data } = await api.login(formData);
+
+        dispatch({ type: AUTH, data });
+
+        navigate("/");
+    } catch (error) {
+        dispatch({ type: ERROR, data: error?.response?.data });
+    }
+};

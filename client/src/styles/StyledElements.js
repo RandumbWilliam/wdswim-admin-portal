@@ -1,29 +1,26 @@
 import styled from "styled-components";
 import { Container } from "semantic-ui-react";
+import { BOLD_FONT_WEIGHT, XXL_FONT_SIZE } from "./StyledVariables";
 
-const handleSectionHeight = (height) => {
-    switch (height) {
-        case "full":
-            return "100vh";
-        default:
-            return "";
-    }
-};
-
-export const Section = styled.section`
-    height: ${({ height }) => handleSectionHeight(height)};
-    min-height: 768px;
+export const ContentContainer = styled.main`
+    flex-grow: 1;
     display: flex;
-    ${(props) =>
-        props.center
-            ? `justify-content: center;
-            align-items: center;
-            `
-            : `padding: 120px 0;`}
+    flex-direction: column;
+    overflow-y: auto;
 `;
 
-export const AppContainer = styled(Container)`
-    height: 100vh;
+export const AppContainer = styled.div`
     display: flex;
     position: relative;
+    height: 100vh;
+`;
+
+export const PageContainer = styled.div`
+    display: flex;
+    height: 100vh;
+`;
+
+export const Title = styled.h1`
+    font-weight: ${BOLD_FONT_WEIGHT};
+    font-size: ${XXL_FONT_SIZE};
 `;
