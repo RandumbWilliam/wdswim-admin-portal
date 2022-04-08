@@ -9,7 +9,7 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const [data, _] = await User.findOne({ username: email });
+        const [data, _] = await User.findOne({ email: email });
         const existingUser = data[0];
 
         if (!existingUser)

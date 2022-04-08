@@ -5,7 +5,7 @@ export const addAdminAccount = (formData, navigate) => async (dispatch) => {
     try {
         const { data } = await api.addAdminAccount(formData);
 
-        dispatch({ type: ADD_ADMIN, data });
+        dispatch({ type: ADD_ADMIN, payload: data });
     } catch (error) {
         console.log(error);
     }

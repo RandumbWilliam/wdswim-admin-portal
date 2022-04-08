@@ -1,55 +1,39 @@
 import db from "../config/db.js";
 
 class User {
-    constructor(firstName, lastName, email, password, stat, level) {
+    constructor(firstName, lastName, email, password, stat, level, createdBy) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.stat = stat;
         this.level = level;
+        this.createdBy = createdBy;
     }
 
     save() {
-        let d = new Date();
-        let yyyy = d.getFullYear();
-        let mm = d.getMonth() + 1;
-        let dd = d.getDate();
-
-        let createdAtDate = `${yyyy}-${mm}-${dd}`;
-
         let sql = `
-            INSERT INTO Admin_Accounts(
-                firstName,
-                lastName,
-                email,
-                password,
-                stat,
-                level,
-                created_by,
-                created_on
-            )
-            VALUES(
-                '${this.firstName}',
-                '${this.lastName}',
+            CALL adminAccountsAdd(
                 '${this.email}',
                 '${this.password}',
+                '${this.firstName}',
+                '${this.lastName}',
                 '${this.stat}',
                 '${this.level}',
-                '${createdAtDate}',
-            )
+                '${this.createdBy}'
+            );
         `;
-
+        
         return db.execute(sql);
     }
 
-    static findOne({ username }) {
-        let sql = `SELECT * FROM Admin_Accounts WHERE user_name = "${username}" AND status_id = "A"`;
+    static findOne({ email }) {
+        let sql = `SELECT * FROM AdminAccounts WHERE email = "${email}" AND status = "A"`;
         return db.execute(sql);
     }
 
     static fetchAll() {
-        let sql = "SELECT * FROM Admin_Accounts;";
+        let sql = "SELECT * FROM AdminAccounts;";
         return db.execute(sql);
     }
 }

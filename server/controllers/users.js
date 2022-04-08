@@ -5,14 +5,17 @@ import User from "../models/user.js";
 dotenv.config();
 
 export const addAdminAccount = async (req, res) => {
-    const { firstName, lastName, email, password, stat, level } = req.body;
+
+    const { firstName, lastName, email, password, stat, level, createdBy } = req.body;
 
     try {
-        const [data] = await User.findOne({ username: email });
+        const [data] = await User.findOne({ email: email });
         const existingUser = data[0];
+        
 
-        if (!existingUser)
+        if (existingUser)
             return res.status(404).json({ message: "User already exist." });
+        
 
         const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -22,11 +25,12 @@ export const addAdminAccount = async (req, res) => {
             email,
             hashedPassword,
             stat,
-            level
+            level,
+            createdBy
         );
-
-        const [result] = await newUser.save();
-
+        
+        const result = await newUser.save();
+        
         res.status(201).json({ result });
     } catch (error) {
         res.status(500).json({ message: "Something went wrong. " });

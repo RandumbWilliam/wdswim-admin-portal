@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { addAdminAccount, getAdminAccount } from "../../actions/users";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { isAuthenticated } from "../../helpers/auth";
 
 const status = [
     { text: "Active", value: "A" },
@@ -31,33 +32,35 @@ const initialState = {
     password: "",
     stat: status[0].value,
     level: levels[0].value,
+    createdBy: isAuthenticated().email,
 };
+
 
 const Users = () => {
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState(initialState);
     const adminData = useSelector((state) => state.users);
-
+    
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    
     const handleOpenModal = () => {
         setOpen(true);
     };
-
+    
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(addAdminAccount(formData, navigate));
         setOpen(false);
     };
-
+    
     useEffect(() => {
         dispatch(getAdminAccount());
-    }, [dispatch]);
+    }, [adminData]);
 
     return (
         <PageContainer>
@@ -88,19 +91,19 @@ const Users = () => {
                             {adminData.map((item, index) => (
                                 <CustomTable.Row key={index}>
                                     <CustomTable.Cell>
-                                        {item.user_name}
+                                        {item.email}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.status_id}
+                                        {item.status}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.account_lvl}
+                                        {item.level}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.created_by}
+                                        {item.createdBy}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.created_on}
+                                        {item.createdDate && item.createdDate.substring(0,10)}
                                     </CustomTable.Cell>
                                 </CustomTable.Row>
                             ))}
@@ -180,6 +183,7 @@ const Users = () => {
             </Modal>
         </PageContainer>
     );
+    
 };
 
 export default Users;
