@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Menu } from "@randumbwilliam/react-pro-sidebar";
+import { Link } from "react-router-dom";
+import { Menu, SidebarHeader } from "@randumbwilliam/react-pro-sidebar";
 import {
     CustomProSidebar,
     CustomMenuItem,
     CustomSubMenu,
+    LogoContainer,
 } from "./StyledNavbar";
 import "@randumbwilliam/react-pro-sidebar/dist/css/styles.css";
 import {
@@ -15,6 +17,7 @@ import {
     FaChartBar,
     FaCog,
 } from "react-icons/fa";
+import Logo from "../../assets/common/logo.png";
 
 const Navbar = () => {
     const [collapsed, setCollapsed] = useState(true);
@@ -25,6 +28,13 @@ const Navbar = () => {
 
     return (
         <CustomProSidebar collapsed={collapsed}>
+            <SidebarHeader>
+                <LogoContainer>
+                    <Link to="/">
+                        <img src={Logo} width="50px" />
+                    </Link>
+                </LogoContainer>
+            </SidebarHeader>
             <Menu>
                 <CustomMenuItem icon={<FaBars />} onClick={handleCollapsed}>
                     WD Swim
@@ -61,7 +71,9 @@ const Navbar = () => {
                         <CustomMenuItem>Discounts</CustomMenuItem>
                         <CustomMenuItem>Other Fees</CustomMenuItem>
                     </CustomSubMenu>
-                    <CustomMenuItem>Users</CustomMenuItem>
+                    <CustomMenuItem>
+                        <Link to="/users">Users</Link>
+                    </CustomMenuItem>
                     <CustomSubMenu title="General">
                         <CustomMenuItem>Camps</CustomMenuItem>
                         <CustomMenuItem>Locations</CustomMenuItem>

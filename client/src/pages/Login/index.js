@@ -13,9 +13,10 @@ import {
 import { PageContainer } from "../../styles/StyledElements";
 import LoginPic from "../../assets/Abstract.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { login } from "../../actions/auth";
 import { REMOVE_ERROR } from "../../constants/actionTypes";
+import { isAuthenticated } from "../../helpers/auth";
 
 const initialState = {
     email: "",
@@ -23,19 +24,11 @@ const initialState = {
 };
 
 const Login = () => {
-    const [user, setUser] = useState(
-        JSON.parse(localStorage.getItem("profile"))
-    );
     const [formData, setFormData] = useState(initialState);
     const [loading, setLoading] = useState(false);
     const authData = useSelector((state) => state.auth.authData);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const location = useLocation();
-
-    useEffect(() => {
-        setUser(JSON.parse(localStorage.getItem("profile")));
-    }, [location]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -51,6 +44,12 @@ const Login = () => {
     const removeError = () => {
         dispatch({ type: REMOVE_ERROR });
     };
+
+    useEffect(() => {
+        if (isAuthenticated()) {
+            navigate("/");
+        }
+    }, [navigate]);
 
     return (
         <PageContainer>
@@ -80,12 +79,7 @@ const Login = () => {
                                         value={formData.password}
                                         placeholder="Password"
                                     />
-                                    <StyledSignInButton
-                                        content="Log In"
-                                        type="submit"
-                                        primary
-                                    />
-                                    {/* {loading ? (
+                                    {loading ? (
                                         <StyledSignInButton
                                             content="Log In"
                                             primary
@@ -98,7 +92,7 @@ const Login = () => {
                                             type="submit"
                                             primary
                                         />
-                                    )} */}
+                                    )}
                                     {authData?.message && (
                                         <p style={{ color: "red" }}>
                                             {authData?.message}

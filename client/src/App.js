@@ -1,29 +1,21 @@
 import React, { Fragment } from "react";
 import { AppContainer, ContentContainer } from "./styles/StyledElements";
 import Navbar from "./components/Navbar";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyle from "./styles/StyledGlobal";
 import Dashboard from "./pages/Dashboard";
 import Header from "./components/Header";
 import Login from "./pages/Login";
-import Admin from "./pages/Admin";
 import ProtectedRoutes from "./services/ProtectedRoutes";
+import Users from "./pages/Users";
 
 const App = () => {
-    const authenticated = JSON.parse(localStorage.getItem("profile"));
-
     return (
         <Fragment>
             <GlobalStyle />
             <BrowserRouter>
                 <Routes>
-                    <Route
-                        path="/login"
-                        exact
-                        element={
-                            !authenticated ? <Login /> : <Navigate to="/" />
-                        }
-                    />
+                    <Route path="/login" exact element={<Login />} />
                     <Route element={<ProtectedRoutes />}>
                         <Route
                             path="/*"
@@ -39,9 +31,9 @@ const App = () => {
                                                 element={<Dashboard />}
                                             />
                                             <Route
-                                                path="/admin"
+                                                path="/users"
                                                 exact
-                                                element={<Admin />}
+                                                element={<Users />}
                                             />
                                         </Routes>
                                     </ContentContainer>

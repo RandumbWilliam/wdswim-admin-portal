@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
-import Login from "../pages/Login";
+import { isAuthenticated } from "../helpers/auth";
 
 const ProtectedRoutes = () => {
-    const user = JSON.parse(localStorage.getItem("profile"));
-    return user ? <Outlet /> : <Navigate to="/login" />;
+    const authenticated = isAuthenticated();
+    return authenticated ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoutes;

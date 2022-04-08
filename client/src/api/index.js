@@ -13,3 +13,8 @@ API.interceptors.request.use((req) => {
 });
 
 export const login = (formData) => API.post("/auth/login", formData);
+
+export const addAdminAccount = (formData) =>
+    API.post("/users/addAdminAccount", formData);
+
+export const getAdminAccount = () => API.get("/users/getAdminAccount");

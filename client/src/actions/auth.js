@@ -1,5 +1,6 @@
 import { AUTH, ERROR } from "../constants/actionTypes";
 import * as api from "../api";
+import { isAuthenticated } from "../helpers/auth";
 
 export const login = (formData, navigate) => async (dispatch) => {
     try {
@@ -7,7 +8,11 @@ export const login = (formData, navigate) => async (dispatch) => {
 
         dispatch({ type: AUTH, data });
 
-        navigate("/");
+        if (isAuthenticated()) {
+            navigate("/");
+        } else {
+            console.log("nothing");
+        }
     } catch (error) {
         dispatch({ type: ERROR, data: error?.response?.data });
     }

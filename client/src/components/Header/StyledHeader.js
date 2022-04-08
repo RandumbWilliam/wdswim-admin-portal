@@ -1,4 +1,3 @@
-import { Container } from "semantic-ui-react";
 import styled from "styled-components";
 import {
     BOLD_FONT_WEIGHT,

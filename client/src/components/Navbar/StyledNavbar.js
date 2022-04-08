@@ -7,10 +7,15 @@ import {
 import { WHITE_COLOR, PRIMARY_COLOR } from "../../styles/StyledVariables";
 
 export const CustomProSidebar = styled(ProSidebar)`
-    color: ${WHITE_COLOR};
+    &&&& {
+        color: ${WHITE_COLOR};
 
-    .pro-sidebar-inner {
-        background: ${PRIMARY_COLOR};
+        a {
+            color: ${WHITE_COLOR};
+        }
+
+        .pro-sidebar-inner {
+            background: ${PRIMARY_COLOR};
     }
 `;
 
@@ -28,4 +33,11 @@ export const CustomSubMenu = styled(SubMenu)`
     .pro-arrow {
         border-color: ${WHITE_COLOR} !important;
     }
+`;
+
+export const LogoContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 0;
 `;
