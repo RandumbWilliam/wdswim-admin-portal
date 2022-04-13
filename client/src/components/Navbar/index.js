@@ -48,7 +48,9 @@ const Navbar = () => {
                     <CustomMenuItem>Students</CustomMenuItem>
                 </CustomSubMenu>
                 <CustomSubMenu title="Classes" icon={<FaBook />}>
-                    <CustomMenuItem>Schedule</CustomMenuItem>
+                    <CustomMenuItem>
+                        <Link to="/classes">Classes</Link>
+                    </CustomMenuItem>
                     <CustomMenuItem>Set Up Classes</CustomMenuItem>
                 </CustomSubMenu>
                 <CustomSubMenu title="Employees" icon={<FaUsers />}>

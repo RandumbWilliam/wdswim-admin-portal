@@ -14,8 +14,7 @@ export const addAdminAccount = async (req, res) => {
         
 
         if (existingUser)
-            return res.status(404).json({ message: "User already exist." });
-        
+            return res.status(400).json({ message: "User already exist." });
 
         const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -29,9 +28,12 @@ export const addAdminAccount = async (req, res) => {
             createdBy
         );
         
-        const result = await newUser.save();
+        await newUser.save();
+
+        const [result] = await User.findOne({email: email});
+        const user = result[0];
         
-        res.status(201).json({ result });
+        res.status(201).json(user);
     } catch (error) {
         res.status(500).json({ message: "Something went wrong. " });
     }

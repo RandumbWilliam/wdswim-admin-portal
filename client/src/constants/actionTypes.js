@@ -5,3 +5,4 @@ export const REMOVE_ERROR = "REMOVE_ERROR";
 
 export const ADD_ADMIN = "ADD_ADMIN";
 export const GET_ADMIN = "GET_ADMIN";
+export const GET_CLASSES = "GET_CLASSES";
