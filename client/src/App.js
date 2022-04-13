@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import Login from "./pages/Login";
 import ProtectedRoutes from "./services/ProtectedRoutes";
 import Users from "./pages/Users";
+import Classes from "./pages/Classes";
 
 const App = () => {
     return (
@@ -34,6 +35,11 @@ const App = () => {
                                                 path="/users"
                                                 exact
                                                 element={<Users />}
+                                            />
+                                            <Route
+                                                path="/classes"
+                                                exact
+                                                element={<Classes />}
                                             />
                                         </Routes>
                                     </ContentContainer>

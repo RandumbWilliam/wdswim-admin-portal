@@ -60,7 +60,7 @@ const Users = () => {
     
     useEffect(() => {
         dispatch(getAdminAccount());
-    }, [adminData]);
+    }, []);
 
     return (
         <PageContainer>
@@ -121,9 +121,10 @@ const Users = () => {
             >
                 <Header content="Add Admin Account" />
                 <Modal.Content>
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <Form.Group widths="equal">
                             <Form.Input
+                                required
                                 fluid
                                 name="firstName"
                                 label="First name"
@@ -131,6 +132,7 @@ const Users = () => {
                                 onChange={handleChange}
                             />
                             <Form.Input
+                                required
                                 fluid
                                 name="lastName"
                                 label="Last name"
@@ -139,6 +141,7 @@ const Users = () => {
                             />
                         </Form.Group>
                         <Form.Input
+                            required
                             fluid
                             name="email"
                             label="Email"
@@ -146,6 +149,7 @@ const Users = () => {
                             onChange={handleChange}
                         />
                         <Form.Input
+                            required
                             fluid
                             name="password"
                             label="Password"
@@ -170,16 +174,9 @@ const Users = () => {
                                 defaultValue={formData.level}
                             />
                         </Form.Group>
+                        <Form.Button content='Submit'  />
                     </Form>
                 </Modal.Content>
-                <Modal.Actions>
-                    <Button color="red" onClick={() => setOpen(false)}>
-                        <Icon name="remove" /> No
-                    </Button>
-                    <Button color="green" onClick={handleSubmit}>
-                        <Icon name="checkmark" /> Yes
-                    </Button>
-                </Modal.Actions>
             </Modal>
         </PageContainer>
     );

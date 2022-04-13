@@ -3,6 +3,8 @@ import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/auth.js";
 import usersRoutes from "./routes/users.js";
+import classesRoutes from "./routes/classes.js";
+
 
 dotenv.config();
 
@@ -13,6 +15,7 @@ app.use(cors());
 
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
+app.use("/classes", classesRoutes);
 
 app.use((err, req, res, next) => {
     console.log(err.stack);
