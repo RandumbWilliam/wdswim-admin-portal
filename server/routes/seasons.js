@@ -1,9 +1,9 @@
 import express from "express";
-import { addSeason, getSeason } from "../controllers/seasons.js";
+import { addSeasons, getSeasons } from "../controllers/seasons.js";
 
 const router = express.Router();
 
-router.post("/addSeason", addSeason);
-router.get("/getSeason", getSeason);
+router.post("/addSeasons", addSeasons);
+router.get("/getSeasons", getSeasons);
 
 export default router;

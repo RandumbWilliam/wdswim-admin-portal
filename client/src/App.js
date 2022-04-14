@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import ProtectedRoutes from "./services/ProtectedRoutes";
 import Users from "./pages/Users";
 import Classes from "./pages/Classes";
+import Seasons from "./pages/Seasons";
 
 const App = () => {
     return (
@@ -40,6 +41,11 @@ const App = () => {
                                                 path="/classes"
                                                 exact
                                                 element={<Classes />}
+                                            />
+                                            <Route
+                                                path="/seasons"
+                                                exact
+                                                element={<Seasons />}
                                             />
                                         </Routes>
                                     </ContentContainer>
