@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import Discounts from "../models/discounts.js";
+import Discounts from "../../models/classSettings/discounts.js";
 
 dotenv.config();
 

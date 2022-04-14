@@ -1,5 +1,5 @@
 import express from "express";
-import { addDiscounts, getDiscounts } from "../controllers/discounts.js";
+import { addDiscounts, getDiscounts } from "../../controllers/classSettings/discounts.js";
 
 const router = express.Router();
 

@@ -1,9 +1,9 @@
 import express from "express";
-import { addDiscounts, getDiscounts } from "../controllers/discounts.js";
+import { addAccountHolders, getAccountHolder } from "../controllers/accountHolders.js";
 
 const router = express.Router();
 
-router.post("/addDiscounts", addDiscounts);
-router.get("/getDiscounts", getDiscounts);
+router.post("/addAccountHolders", addAccountHolders);
+router.get("/getAccountHolder", getAccountHolder);
 
 export default router;

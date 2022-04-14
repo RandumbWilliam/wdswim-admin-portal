@@ -1,20 +1,20 @@
 import dotenv from "dotenv";
-import LessonType from "../../models/classSettings/lessonType.js";
+import SwimLevels from "../../models/classSettings/swimLevels.js";
 
 dotenv.config();
 
-export const addLessonType = async (req, res) => {
+export const addSwimLevels = async (req, res) => {
 
     const { name, displayOrder } = req.body;
 
     try {
 
-        let newLessonType = new LessonType(
-            name,
+        let newSwimLevels = new SwimLevels(
+            name, 
             displayOrder
         );
         
-        const result = await newLessonType.save();
+        const result = await newSwimLevels.save();
         
         res.status(201).json({ result });
     } catch (error) {
@@ -22,9 +22,9 @@ export const addLessonType = async (req, res) => {
     }
 };
 
-export const getLessonType = async (req, res) => {
+export const getSwimLevels = async (req, res) => {
     try {
-        const [data, _] = await LessonType.fetchAll();
+        const [data, _] = await SwimLevels.fetchAll();
 
         res.status(200).json(data);
     } catch (error) {

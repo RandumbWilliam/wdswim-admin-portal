@@ -6,6 +6,13 @@ import usersRoutes from "./routes/users.js";
 import discountsRoutes from "./routes/classSettings/discounts.js";
 import lessonTypeRoutes from "./routes/classSettings/lessonType.js";
 import classesRoutes from "./routes/classes.js";
+import accountHoldersRoutes from "./routes/accountHolders.js";
+import swimLevelsRoutes from "./routes/classSettings/swimLevels.js";
+import otherFeesRoutes from "./routes/classSettings/otherFees.js";
+import pricingRoutes from "./routes/classSettings/pricing.js";
+import locationsRoutes from "./routes/locations.js";
+import seasonsRoutes from "./routes/seasons.js";
+import studentsRoutes from "./routes/students.js";
 
 
 dotenv.config();
@@ -20,6 +27,13 @@ app.use("/users", usersRoutes);
 app.use("/discounts", discountsRoutes);
 app.use("/lessonType", lessonTypeRoutes);
 app.use("/classes", classesRoutes);
+app.use("/accountHolders", accountHoldersRoutes);
+app.use("/swimLevels", swimLevelsRoutes);
+app.use("/otherFees", otherFeesRoutes);
+app.use("/pricing", pricingRoutes);
+app.use("/locations", locationsRoutes);
+app.use("/seasons", seasonsRoutes);
+app.use("/students", studentsRoutes);
 
 app.use((err, req, res, next) => {
     console.log(err.stack);

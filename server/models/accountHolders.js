@@ -1,8 +1,7 @@
 import db from "../config/db.js";
 
 class AccountHolder {
-    constructor(id = null, contactName, email, phoneNumber, emergencyContact, emergencyPhone, address1, address2, city, province, postalCode, dateCreated, notes) {
-        this.id = id;
+    constructor(contactName, email, phoneNumber, emergencyContact, emergencyPhone, address1, address2, city, province, postalCode, dateCreated, notes) {
         this.contactName = contactName;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -37,21 +36,29 @@ class AccountHolder {
         return db.execute(sql);
     }
 
-    findOne({ id = null, contactName, email, phoneNumber }) {
+    static findOne({ id}) {
         let sql = `
             CALL accountHoldersSearch(
-                '${this.id}',
-                '${this.contactName}',
-                '${this.email}',
-                '${this.phoneNumber}'
+                '${id}', "", "", ""
+            );`
+        return db.execute(sql);
+    }
+
+    static fetchSome(contactName, email, phoneNumber) {
+        let sql = `
+            CALL accountHoldersSearch(
+                NULL,
+                '${contactName}',
+                '${email}',
+                '${phoneNumber}'
             );`
         return db.execute(sql);
     }
 
     static fetchAll() {
-        let sql = "SELECT * FROM Discounts;";
+        let sql = "SELECT * FROM AccountHolders;";
         return db.execute(sql);
     }
 }
 
-export default Discounts;
+export default AccountHolder;

@@ -1,5 +1,5 @@
 import express from "express";
-import { addLessonType, getLessonType } from "../../controllers/lessonType.js";
+import { addLessonType, getLessonType } from "../../controllers/classSettings/lessonType.js";
 
 const router = express.Router();
 

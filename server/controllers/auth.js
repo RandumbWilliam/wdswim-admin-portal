@@ -12,6 +12,8 @@ export const login = async (req, res) => {
         const [data, _] = await User.findOne({ email: email });
         const existingUser = data[0];
 
+        console.log(data)
+
         if (!existingUser)
             return res.status(404).json({ message: "User doesn't exist." });
 
@@ -19,6 +21,8 @@ export const login = async (req, res) => {
             password,
             existingUser.password
         );
+
+        console.log(isPasswordCorrect)
 
         if (!isPasswordCorrect)
             return res.status(400).json({ message: "Invalid credentials." });
@@ -28,6 +32,8 @@ export const login = async (req, res) => {
             process.env.JWTSECRET,
             { expiresIn: process.env.JWTEXPIRE }
         );
+
+        console.log(token)
 
         res.status(200).json({ result: existingUser, token });
     } catch (error) {
