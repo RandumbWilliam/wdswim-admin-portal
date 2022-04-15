@@ -3,7 +3,7 @@ import Season from "../models/seasons.js";
 
 dotenv.config();
 
-export const addSeason = async (req, res) => {
+export const addSeasons = async (req, res) => {
 
     const { campusId, seasonName, activeStatus, startDate, endDate, registrationStartDate, note, registrationStatus } = req.body;
 
@@ -28,7 +28,7 @@ export const addSeason = async (req, res) => {
     }
 };
 
-export const getSeason = async (req, res) => {
+export const getSeasons = async (req, res) => {
     try {
         const [data, _] = await Season.fetchAll();
 

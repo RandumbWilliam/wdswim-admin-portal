@@ -40,19 +40,19 @@ const Classes = () => {
                         <CustomTable.Header>
                             <CustomTable.Row>
                                 <CustomTable.HeaderCell>
-                                    Email
+                                    Location
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
-                                    Status
+                                    Lesson Type
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
-                                    Account Level
+                                    # Students
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
-                                    Created by
+                                    Start Date
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
-                                    Created On
+                                    Start Time
                                 </CustomTable.HeaderCell>
                             </CustomTable.Row>
                         </CustomTable.Header>
@@ -60,26 +60,26 @@ const Classes = () => {
                             {classesData.map((item, index) => (
                                 <CustomTable.Row key={index}>
                                     <CustomTable.Cell>
-                                        {item.seasonId}
+                                        {item.locationId}
+                                    </CustomTable.Cell>
+                                    <CustomTable.Cell>
+                                        {item.lessonTypeId}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
                                         {item.numStudents}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.level}
+                                        {item.startDate && item.startDate.substring(0,10)}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.createdBy}
-                                    </CustomTable.Cell>
-                                    <CustomTable.Cell>
-                                        {item.createdDate && item.createdDate.substring(0,10)}
+                                        {item.startTime}
                                     </CustomTable.Cell>
                                 </CustomTable.Row>
                             ))}
                         </CustomTable.Body>
                     </CustomTable>
                 ) : (
-                    <div>No Accounts</div>
+                    <div>No Data</div>
                 )}
             </Container>
         </PageContainer>

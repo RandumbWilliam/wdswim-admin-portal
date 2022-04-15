@@ -19,3 +19,7 @@ export const addAdminAccount = (formData) => API.post("/users/addAdminAccount", 
 export const getAdminAccount = () => API.get("/users/getAdminAccount");
 
 export const getClasses = () => API.get("/classes/getClasses");
+
+export const getSeasons = () => API.get("/seasons/getSeasons");
+
+export const addSeasons = () => API.get("/seasons/addSeasons");

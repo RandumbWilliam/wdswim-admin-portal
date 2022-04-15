@@ -72,6 +72,7 @@ const Navbar = () => {
                         <CustomMenuItem>Pricing List</CustomMenuItem>
                         <CustomMenuItem>Discounts</CustomMenuItem>
                         <CustomMenuItem>Other Fees</CustomMenuItem>
+                        <Link to="/seasons">Seasons</Link>
                     </CustomSubMenu>
                     <CustomMenuItem>
                         <Link to="/users">Users</Link>

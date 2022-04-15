@@ -1,6 +1,6 @@
 import db from "../config/db.js";
 
-class Season {
+class Seasons {
     constructor(campusId, seasonName, activeStatus, startDate, endDate, registrationStartDate, note, registrationStatus) {
         this.campusId = campusId;
         this.seasonName = seasonName;
@@ -54,4 +54,4 @@ class Season {
     }
 }
 
-export default Season;
+export default Seasons;
