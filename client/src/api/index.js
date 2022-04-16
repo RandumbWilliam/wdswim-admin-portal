@@ -53,3 +53,7 @@ export const getStudents = () => API.get("/students/getStudents");
 export const addSwimLevels = (formData) => API.post("/classSettings/swimLevels/addSwimLevels", formData);
 
 export const getSwimLevels = () => API.get("/classSettings/swimLevels/getSwimLevels");
+
+export const addCampus = (formData) => API.post("/campus/addCampus", formData);
+
+export const getCampus = () => API.get("/campus/getCampus");

@@ -1,5 +1,5 @@
-import { ADD_DISCOUNTS, GET_DISCOUNTS } from "../constants/actionTypes";
-import * as api from "../api";
+import { ADD_DISCOUNTS, GET_DISCOUNTS } from "../../constants/actionTypes";
+import * as api from "../../api";
 
 export const addDiscounts = (formData, navigate) => async (dispatch) => {
     try {

@@ -110,7 +110,7 @@ const Users = () => {
                         </CustomTable.Body>
                     </CustomTable>
                 ) : (
-                    <div>No Accounts</div>
+                    <div>No Data</div>
                 )}
             </Container>
             <Modal

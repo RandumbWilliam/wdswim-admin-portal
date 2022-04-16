@@ -13,10 +13,13 @@ export const addDiscounts = async (req, res) => {
             description,
             percentage
         );
+
+        await newDiscounts.save();
         
-        const result = await newDiscounts.save();
+        const [result] = await Discounts.findOne({description: description});
+        const discount = result[0];
         
-        res.status(201).json({ result });
+        res.status(201).json(discount);
     } catch (error) {
         res.status(500).json({ message: "Something went wrong. " });
     }

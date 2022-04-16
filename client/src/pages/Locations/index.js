@@ -7,33 +7,38 @@ import {
     Header,
     Form,
 } from "semantic-ui-react";
-import { PageContainer } from "../../../styles/StyledElements";
-import { CustomTable, CustomButton } from "./StyledDiscounts";
+import { PageContainer } from "../../styles/StyledElements";
+import { CustomTable, CustomButton } from "./StyledLocations";
 import { useDispatch } from "react-redux";
-import { addDiscounts, getDiscounts } from "../../../actions/classSettings/discounts";
+import { addLocations, getLocations } from "../../actions/locations";
+import { getCampus } from "../../actions/campus";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const status = [
+const activeStatus = [
     { text: "Active", value: "A" },
     { text: "Inactive", value: "Z" },
 ];
-
-const levels = [
-    { text: "Noob", value: "0" },
-    { text: "God", value: "1" },
+const campus = [
+    { text: 1, value: "A" },
+    { text: 2, value: "Z" },
 ];
 
 const initialState = {
-    levelId: "",
-    duration: "",
-    price: ""
+    campusId: "",
+    locationName: "",
+    address: "",
+    mapURL: "",
+    activeStatus: ""
 };
 
-const Discounts = () => {
+const Locations = () => {
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState(initialState);
-    const discountsData = useSelector((state) => state.discounts);
+    const locationsData = useSelector((state) => state.locations);
+    const campusData = useSelector((state) => state.campus);
+
+    console.log(campusData)
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -48,27 +53,33 @@ const Discounts = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addDiscounts(formData, navigate));
+        dispatch(addLocations(formData, navigate));
         setOpen(false);
     };
 
-    useEffect(() => {
-        dispatch(getDiscounts());
+    useEffect(() => { 
+        dispatch(getLocations(), getCampus());
     }, []);
 
     return (
         <PageContainer>
             <Container>
-                <CustomButton onClick={handleOpenModal}>Add Discounts</CustomButton>
-                {discountsData ? (
+                <CustomButton onClick={handleOpenModal}>Add Locations</CustomButton>
+                {locationsData ? (
                     <CustomTable>
                         <CustomTable.Header>
                             <CustomTable.Row>
                                 <CustomTable.HeaderCell>
-                                    Description
+                                    Campus
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
-                                    Percentage
+                                    Location
+                                </CustomTable.HeaderCell>
+                                <CustomTable.HeaderCell>
+                                    Address
+                                </CustomTable.HeaderCell>
+                                <CustomTable.HeaderCell>
+                                    Map URL
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
                                     Status
@@ -76,16 +87,22 @@ const Discounts = () => {
                             </CustomTable.Row>
                         </CustomTable.Header>
                         <CustomTable.Body>
-                            {discountsData.map((item, index) => (
+                            {locationsData.map((item, index) => (
                                 <CustomTable.Row key={index}>
                                     <CustomTable.Cell>
-                                        {item.description}
+                                        {item.campusName}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.percentage}
+                                        {item.locationName}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.status}
+                                        {item.address}
+                                    </CustomTable.Cell>
+                                    <CustomTable.Cell>
+                                        {item.mapURL}
+                                    </CustomTable.Cell>
+                                    <CustomTable.Cell>
+                                        {item.activeStatus}
                                     </CustomTable.Cell>
                                 </CustomTable.Row>
                             ))}
@@ -101,24 +118,41 @@ const Discounts = () => {
                 open={open}
                 onClose={() => setOpen(false)}
             >
-                <Header content="Add Discounts" />
+                <Header content="Add Locations" />
                 <Modal.Content>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group widths="equal">
+                            <Form.Select
+                                required
+                                fluid
+                                name="campusId"
+                                label="Campus"
+                                onChange={handleChange}
+                                options={locationsData}
+                                defaultValue={formData.stat}
+                            />
                             <Form.Input
                                 required
                                 fluid
-                                name="description"
-                                label="Description"
-                                placeholder="Description"
+                                name="locationName"
+                                label="Location"
+                                placeholder="Location"
                                 onChange={handleChange}
                             />
                             <Form.Input
                                 required
                                 fluid
-                                name="percentage"
-                                label="Percentage"
-                                placeholder="Percentage"
+                                name="address"
+                                label="Address"
+                                placeholder="Address"
+                                onChange={handleChange}
+                            />
+                            <Form.Input
+                                required
+                                fluid
+                                name="mapUrl"
+                                label="MapURL"
+                                placeholder="MapURL"
                                 onChange={handleChange}
                             />
                         </Form.Group>
@@ -131,4 +165,4 @@ const Discounts = () => {
     
 };
 
-export default Discounts;
+export default Locations;

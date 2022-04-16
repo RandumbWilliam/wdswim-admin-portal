@@ -15,3 +15,14 @@ export const GET_SEASONS = "GET_SEASONS";
 export const ADD_DISCOUNTS = "ADD_DISCOUNTS";
 export const GET_DISCOUNTS = "GET_DISCOUNTS";
 
+export const ADD_LESSON_TYPE = "ADD_LESSON_TYPE";
+export const GET_LESSON_TYPE = "GET_LESSON_TYPE";
+
+export const ADD_LOCATIONS = "ADD_LOCATIONS";
+export const GET_LOCATIONS = "GET_LOCATIONS";
+
+export const ADD_CAMPUS = "ADD_CAMPUS";
+export const GET_CAMPUS = "GET_CAMPUS";
+
+export const ADD_SWIM_LEVELS = "ADD_SWIM_LEVELS";
+export const GET_SWIM_LEVELS = "GET_SWIM_LEVELS";

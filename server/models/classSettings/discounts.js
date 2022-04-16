@@ -8,7 +8,7 @@ class Discounts {
 
     save() {
         let sql = `
-            CALL adminAccountsAdd(
+            CALL discountsAdd(
                 '${this.description}',
                 '${this.percentage}'
             );

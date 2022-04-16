@@ -62,10 +62,6 @@ const Navbar = () => {
                     <CustomMenuItem>Student Store Credit</CustomMenuItem>
                 </CustomSubMenu>
                 <CustomSubMenu title="Admin" icon={<FaCog />}>
-                    <CustomSubMenu title="Camps">
-                        <CustomMenuItem>Camps</CustomMenuItem>
-                        <CustomMenuItem>Locations</CustomMenuItem>
-                    </CustomSubMenu>
                     <CustomMenuItem>Swimming Levels</CustomMenuItem>
                     <CustomSubMenu title="Class Settings">
                         <CustomMenuItem>Lesson Types</CustomMenuItem>
@@ -83,7 +79,9 @@ const Navbar = () => {
                     </CustomMenuItem>
                     <CustomSubMenu title="General">
                         <CustomMenuItem>Camps</CustomMenuItem>
-                        <CustomMenuItem>Locations</CustomMenuItem>
+                        <CustomMenuItem>
+                            <Link to="/locations">Locations</Link>
+                        </CustomMenuItem>
                     </CustomSubMenu>
                     <CustomMenuItem>Accouncements</CustomMenuItem>
                     <CustomMenuItem>Web Documents</CustomMenuItem>

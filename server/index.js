@@ -13,6 +13,7 @@ import pricingRoutes from "./routes/classSettings/pricing.js";
 import locationsRoutes from "./routes/locations.js";
 import seasonsRoutes from "./routes/seasons.js";
 import studentsRoutes from "./routes/students.js";
+import campusRoutes from "./routes/campus.js";
 
 
 dotenv.config();
@@ -34,6 +35,7 @@ app.use("/classSettings/pricing", pricingRoutes);
 app.use("/locations", locationsRoutes);
 app.use("/seasons", seasonsRoutes);
 app.use("/students", studentsRoutes);
+app.use("/campus", campusRoutes);
 
 app.use((err, req, res, next) => {
     console.log(err.stack);
