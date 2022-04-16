@@ -1,4 +1,4 @@
-import { ADD_DISCOUNTS, GET_DISCOUNTS } from "../constants/actionTypes";
+import { ADD_DISCOUNTS, GET_DISCOUNTS } from "../../constants/actionTypes";
 
 const discountsReducer = (discountsData = [], action) => {
     switch (action.type) {

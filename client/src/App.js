@@ -11,6 +11,8 @@ import Users from "./pages/Users";
 import Classes from "./pages/Classes";
 import Seasons from "./pages/Seasons";
 import Discounts from "./pages/ClassSettings/Discounts";
+import LessonType from "./pages/ClassSettings/LessonType";
+import Locations from "./pages/Locations";
 
 const App = () => {
     return (
@@ -52,6 +54,16 @@ const App = () => {
                                                 path="/discounts"
                                                 exact
                                                 element={<Discounts />}
+                                            />
+                                            <Route
+                                                path="/lessonType"
+                                                exact
+                                                element={<LessonType />}
+                                            />
+                                            <Route
+                                                path="/locations"
+                                                exact
+                                                element={<Locations />}
                                             />
                                         </Routes>
                                     </ContentContainer>

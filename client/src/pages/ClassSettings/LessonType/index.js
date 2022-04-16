@@ -8,7 +8,7 @@ import {
     Form,
 } from "semantic-ui-react";
 import { PageContainer } from "../../../styles/StyledElements";
-import { CustomTable, CustomButton } from "./StyledDiscounts";
+import { CustomTable, CustomButton } from "./StyledLessonType";
 import { useDispatch } from "react-redux";
 import { addDiscounts, getDiscounts } from "../../../actions/classSettings/discounts";
 import { useNavigate } from "react-router-dom";
