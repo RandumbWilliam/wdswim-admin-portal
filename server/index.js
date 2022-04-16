@@ -24,13 +24,13 @@ app.use(cors());
 
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
-app.use("/discounts", discountsRoutes);
-app.use("/lessonType", lessonTypeRoutes);
+app.use("/classSettings/discounts", discountsRoutes);
+app.use("/classSettings/lessonType", lessonTypeRoutes);
 app.use("/classes", classesRoutes);
 app.use("/accountHolders", accountHoldersRoutes);
-app.use("/swimLevels", swimLevelsRoutes);
-app.use("/otherFees", otherFeesRoutes);
-app.use("/pricing", pricingRoutes);
+app.use("/classSettings/swimLevels", swimLevelsRoutes);
+app.use("/classSettings/otherFees", otherFeesRoutes);
+app.use("/classSettings/pricing", pricingRoutes);
 app.use("/locations", locationsRoutes);
 app.use("/seasons", seasonsRoutes);
 app.use("/students", studentsRoutes);

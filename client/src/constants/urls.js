@@ -3,4 +3,5 @@ export const URLS = [
     { text: "Users", url: "/users" },
     { text: "Classes", url: "/classes" },
     { text: "Seasons", url: "/seasons" },
+    { text: "Discounts", url: "/discounts" },
 ];

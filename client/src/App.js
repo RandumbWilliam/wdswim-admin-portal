@@ -10,6 +10,7 @@ import ProtectedRoutes from "./services/ProtectedRoutes";
 import Users from "./pages/Users";
 import Classes from "./pages/Classes";
 import Seasons from "./pages/Seasons";
+import Discounts from "./pages/ClassSettings/Discounts";
 
 const App = () => {
     return (
@@ -46,6 +47,11 @@ const App = () => {
                                                 path="/seasons"
                                                 exact
                                                 element={<Seasons />}
+                                            />
+                                            <Route
+                                                path="/discounts"
+                                                exact
+                                                element={<Discounts />}
                                             />
                                         </Routes>
                                     </ContentContainer>

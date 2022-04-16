@@ -70,10 +70,14 @@ const Navbar = () => {
                     <CustomSubMenu title="Class Settings">
                         <CustomMenuItem>Lesson Types</CustomMenuItem>
                         <CustomMenuItem>Pricing List</CustomMenuItem>
-                        <CustomMenuItem>Discounts</CustomMenuItem>
+                        <CustomMenuItem> 
+                            <Link to="/discounts">Discounts</Link>
+                        </CustomMenuItem>
                         <CustomMenuItem>Other Fees</CustomMenuItem>
-                        <Link to="/seasons">Seasons</Link>
                     </CustomSubMenu>
+                    <CustomMenuItem>
+                        <Link to="/seasons">Seasons</Link>
+                    </CustomMenuItem>
                     <CustomMenuItem>
                         <Link to="/users">Users</Link>
                     </CustomMenuItem>
