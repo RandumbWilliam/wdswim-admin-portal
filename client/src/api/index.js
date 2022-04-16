@@ -20,6 +20,8 @@ export const getAdminAccount = () => API.get("/users/getAdminAccount");
 
 export const getClasses = () => API.get("/classes/getClasses");
 
+export const addClasses = (formData) => API.post("/users/addClasses", formData);
+
 export const getSeasons = () => API.get("/seasons/getSeasons");
 
 export const addSeasons = () => API.get("/seasons/addSeasons");

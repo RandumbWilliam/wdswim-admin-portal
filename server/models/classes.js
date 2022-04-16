@@ -17,6 +17,25 @@ class Classes {
         
     }
 
+    save() {
+        let sql = `
+            CALL seasonAdd(
+                '${this.seasonId}',
+                '${this.numStudents}',
+                '${this.startDate}',
+                '${this.endDate}',
+                '${this.instructorId}',
+                '${this.lessonTypeId}',
+                '${this.swimLevelId}',
+                '${this.locationId}',
+                '${this.startTime}',
+                '${this.endTime}'
+            );
+        `;
+        
+        return db.execute(sql);
+    }
+
     static fetchAll() {
         let sql = "SELECT * FROM Classes;";
         return db.execute(sql);
