@@ -14,15 +14,43 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { isAuthenticated } from "../../helpers/auth";
+import SemanticDatepicker from 'react-semantic-ui-datepickers';
 
+
+
+const initialState = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    createdBy: isAuthenticated().email,
+};
 
 
 const Seasons = () => {
     const [open, setOpen] = useState(false);
+    const [formData, setFormData] = useState(initialState);
     const seasonData = useSelector((state) => state.seasons);
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const [currentDate, setNewDate] = useState(null);
+    const onChange = (event, data) => setNewDate(data.value);
+
+    const handleOpenModal = () => {
+        setOpen(true);
+    };
+    
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(addSeasons(formData, navigate));
+        setOpen(false);
+    };
     
     useEffect(() => {
         dispatch(getSeasons());
@@ -31,6 +59,7 @@ const Seasons = () => {
     return (
         <PageContainer>
             <Container>
+                <CustomButton onClick={handleOpenModal}>Add Season</CustomButton>
                 {seasonData ? (
                     <CustomTable>
                         <CustomTable.Header>
@@ -72,7 +101,7 @@ const Seasons = () => {
                     <div>No Data</div>
                 )}
             </Container>
-            {/* <Modal
+            <Modal
                 style={{ top: "10%" }}
                 closeIcon
                 open={open}
@@ -81,62 +110,45 @@ const Seasons = () => {
                 <Header content="Add Admin Account" />
                 <Modal.Content>
                     <Form onSubmit={handleSubmit}>
+                        <Form.Input
+                                required
+                                fluid
+                                name="seasonName"
+                                label="Season name"
+                                placeholder="Season Name"
+                                onChange={handleChange}
+                        />
                         <Form.Group widths="equal">
-                            <Form.Input
+                            
+                            <SemanticDatepicker 
                                 required
                                 fluid
-                                name="firstName"
-                                label="First name"
-                                placeholder="First Name"
-                                onChange={handleChange}
-                            />
-                            <Form.Input
+                                name="startDate"
+                                label="Start date"
+                                onChange={handleChange} 
+                            />  
+                            <SemanticDatepicker 
                                 required
                                 fluid
-                                name="lastName"
-                                label="Last name"
-                                placeholder="Last Name"
-                                onChange={handleChange}
-                            />
+                                name="End Date"
+                                label="End date"
+                                onChange={handleChange} 
+                            />  
                         </Form.Group>
+                        
                         <Form.Input
                             required
                             fluid
-                            name="email"
-                            label="Email"
-                            placeholder="Email"
+                            name="note"
+                            label="Note"
+                            placeholder="Note"
                             onChange={handleChange}
                         />
-                        <Form.Input
-                            required
-                            fluid
-                            name="password"
-                            label="Password"
-                            placeholder="Password"
-                            onChange={handleChange}
-                        />
-                        <Form.Group widths="equal">
-                            <Form.Select
-                                fluid
-                                name="stat"
-                                label="Status"
-                                onChange={handleChange}
-                                options={status}
-                                defaultValue={formData.stat}
-                            />
-                            <Form.Select
-                                fluid
-                                name="level"
-                                label="Account Level"
-                                options={levels}
-                                onChange={handleChange}
-                                defaultValue={formData.level}
-                            />
-                        </Form.Group>
+                        
                         <Form.Button content='Submit'  />
                     </Form>
                 </Modal.Content>
-            </Modal> */}
+            </Modal>
         </PageContainer>
     );
     
