@@ -37,16 +37,6 @@ class Seasons {
         return db.execute(sql);
     }
 
-    // static fetchSome(contactName, email, phoneNumber) {
-    //     let sql = `
-    //         CALL accountHoldersSearch(
-    //             NULL,
-    //             '${contactName}',
-    //             '${email}',
-    //             '${phoneNumber}'
-    //         );`
-    //     return db.execute(sql);
-    // }
 
     static fetchAll() {
         let sql = "SELECT * FROM Seasons;";

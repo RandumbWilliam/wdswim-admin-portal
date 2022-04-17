@@ -58,7 +58,8 @@ const Locations = () => {
     };
 
     useEffect(() => { 
-        dispatch(getLocations(), getCampus());
+        dispatch(getLocations());
+        dispatch(getCampus());
     }, []);
 
     return (

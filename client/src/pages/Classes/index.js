@@ -37,11 +37,11 @@ const Classes = () => {
     const [formData, setFormData] = useState(initialState);
     const classesData = useSelector((state) => state.classes);
     const seasonsData = useSelector((state) => state.seasons);
-
-    console.log(seasonsData);
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    console.log(seasonsData)
     
     const handleOpenModal = () => {
         setOpen(true);
@@ -58,7 +58,8 @@ const Classes = () => {
     };
     
     useEffect(() => {
-        dispatch(getClasses(), getSeasons());
+        dispatch(getSeasons());
+        dispatch(getClasses());
     }, []);
 
     return (
