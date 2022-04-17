@@ -23,7 +23,7 @@ class LessonType {
     // }
 
     static fetchAll() {
-        let sql = "SELECT * FROM LessonType;";
+        let sql = "SELECT * FROM LessonType ORDER BY displayOrder;";
         return db.execute(sql);
     }
 }

@@ -11,8 +11,8 @@ class OtherFees {
         let sql = `
             CALL otherFeesAdd(
                 '${this.description}',
-                '${this.displayOrder}',
-                '${this.price}'
+                '${this.price}',
+                '${this.displayOrder}'
             );
         `;
         
@@ -39,7 +39,7 @@ class OtherFees {
     // }
 
     static fetchAll() {
-        let sql = "SELECT * FROM OtherFees;";
+        let sql = "SELECT * FROM OtherFees ORDER BY displayOrder;";
         return db.execute(sql);
     }
 }

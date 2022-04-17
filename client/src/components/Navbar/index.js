@@ -44,7 +44,9 @@ const Navbar = () => {
                     <CustomMenuItem>Schedule Display</CustomMenuItem>
                 </CustomSubMenu>
                 <CustomSubMenu title="Customers" icon={<FaSwimmer />}>
-                    <CustomMenuItem>Account Holder</CustomMenuItem>
+                    <CustomMenuItem>
+                        <Link to="/accountHolders">Account Holder</Link>
+                    </CustomMenuItem>
                     <CustomMenuItem>Students</CustomMenuItem>
                 </CustomSubMenu>
                 <CustomSubMenu title="Classes" icon={<FaBook />}>
@@ -62,14 +64,20 @@ const Navbar = () => {
                     <CustomMenuItem>Student Store Credit</CustomMenuItem>
                 </CustomSubMenu>
                 <CustomSubMenu title="Admin" icon={<FaCog />}>
-                    <CustomMenuItem>Swimming Levels</CustomMenuItem>
                     <CustomSubMenu title="Class Settings">
-                        <CustomMenuItem>Lesson Types</CustomMenuItem>
+                        <CustomMenuItem>
+                            <Link to="/lessonType">Lesson Types</Link>
+                        </CustomMenuItem>
                         <CustomMenuItem>Pricing List</CustomMenuItem>
                         <CustomMenuItem> 
                             <Link to="/discounts">Discounts</Link>
                         </CustomMenuItem>
-                        <CustomMenuItem>Other Fees</CustomMenuItem>
+                        <CustomMenuItem>
+                            <Link to="/otherFees">Other Fees</Link>
+                        </CustomMenuItem>
+                        <CustomMenuItem>
+                            <Link to="/swimLevels">Swimming Levels</Link>
+                        </CustomMenuItem>
                     </CustomSubMenu>
                     <CustomMenuItem>
                         <Link to="/seasons">Seasons</Link>

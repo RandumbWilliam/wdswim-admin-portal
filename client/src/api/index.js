@@ -30,13 +30,13 @@ export const addDiscounts = (formData) => API.post("/classSettings/discounts/add
 
 export const getDiscounts = () => API.get("/classSettings/discounts/getDiscounts");
 
-export const getLessonType = (formData) => API.post("/classSettings/lessonType/getLessonType", formData);
+export const addLessonType = (formData) => API.post("/classSettings/lessonType/addLessonType", formData);
 
-export const addLessonType = () => API.get("/classSettings/lessonType/addLessonType");
+export const getLessonType = () => API.get("/classSettings/lessonType/getLessonType");
 
 export const addAccountHolders = (formData) => API.post("/accountHolder/addAccountHolders", formData);
 
-export const getAccountHolder = () => API.get("/accountHolder/getAccountHolder");
+export const getAccountHolder = () => API.get("/accountHolders/getAccountHolder");
 
 export const addLocations = (formData) => API.post("/locations/addLocations", formData);
 
