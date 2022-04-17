@@ -1,4 +1,4 @@
-import { ADD_CLASSES, GET_CLASSES, GET_SEASONS } from "../constants/actionTypes";
+import { ADD_CLASSES, GET_CLASSES } from "../constants/actionTypes";
 
 const classesReducer = (classesData = [], action) => {
     switch (action.type) {
@@ -6,8 +6,6 @@ const classesReducer = (classesData = [], action) => {
             return action.payload;
         case ADD_CLASSES:
             return [...classesData, action.payload];
-        case GET_SEASONS:
-            return action.payload;  
         default:
             return classesData;
     }

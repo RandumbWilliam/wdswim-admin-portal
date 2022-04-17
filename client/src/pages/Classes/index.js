@@ -24,8 +24,6 @@ const instructors = [
 ];
 
 const seasons = [
-    { text: "Active", value: "A" },
-    { text: "Blocked", value: "Z" },
 ];
 
 const initialState = {
@@ -41,7 +39,11 @@ const Classes = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    console.log(seasonsData)
+
+    seasonsData.forEach(e => {
+        
+        seasons.push({text: e.seasonName, value: e.id})
+    });
     
     const handleOpenModal = () => {
         setOpen(true);
@@ -58,8 +60,8 @@ const Classes = () => {
     };
     
     useEffect(() => {
-        dispatch(getSeasons());
         dispatch(getClasses());
+        dispatch(getSeasons());
     }, []);
 
     return (
