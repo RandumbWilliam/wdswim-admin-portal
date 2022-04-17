@@ -6,5 +6,10 @@ import seasons from "./seasons";
 import discounts from "./classSettings/discounts";
 import locations from "./locations";
 import campus from "./campus";
+import accountHolders from "./accountHolders";
+import swimLevels from "./classSettings/swimLevels";
+import lessonType from "./classSettings/lessonType";
+import otherFees from "./classSettings/otherFees.js";
 
-export const reducers = combineReducers({ auth, users, classes, seasons, discounts, locations, campus});
+export const reducers = combineReducers({ auth, users, classes, seasons, discounts, locations, campus, 
+    swimLevels, lessonType, accountHolders, otherFees});

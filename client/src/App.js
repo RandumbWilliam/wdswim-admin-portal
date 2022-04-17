@@ -13,6 +13,9 @@ import Seasons from "./pages/Seasons";
 import Discounts from "./pages/ClassSettings/Discounts";
 import LessonType from "./pages/ClassSettings/LessonType";
 import Locations from "./pages/Locations";
+import SwimLevels from "./pages/ClassSettings/SwimLevels";
+import AccountHolders from "./pages/AccountHolders";
+import OtherFees from "./pages/ClassSettings/OtherFees";
 
 const App = () => {
     return (
@@ -64,6 +67,21 @@ const App = () => {
                                                 path="/locations"
                                                 exact
                                                 element={<Locations />}
+                                            />
+                                            <Route
+                                                path="/swimLevels"
+                                                exact
+                                                element={<SwimLevels />}
+                                            />
+                                            <Route
+                                                path="/accountHolders"
+                                                exact
+                                                element={<AccountHolders />}
+                                            />
+                                            <Route
+                                                path="/otherFees"
+                                                exact
+                                                element={<OtherFees />}
                                             />
                                         </Routes>
                                     </ContentContainer>

@@ -6,4 +6,7 @@ export const URLS = [
     { text: "Discounts", url: "/discounts" },
     { text: "LessonType", url: "/lessonType" },
     { text: "Locations", url: "/locations" },
+    { text: "Swim Levels", url: "/swimLevels" },
+    { text: "Account Holders", url: "/accountHolders" },
+    { text: "Other Fees", url: "/otherFees" },
 ];

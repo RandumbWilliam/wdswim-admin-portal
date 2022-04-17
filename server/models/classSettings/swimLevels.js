@@ -8,7 +8,7 @@ class SwimLevels {
 
     save() {
         let sql = `
-            CALL accountHoldersAdd(
+            CALL swimLevelsAdd(
                 '${this.name}',
                 '${this.displayOrder}'
             );
@@ -19,7 +19,7 @@ class SwimLevels {
 
     static findOne({ id}) {
         let sql = `
-            CALL accountHoldersSearch(
+            CALL swimLevelsSearch(
                 '${id}'
             );`
         return db.execute(sql);
@@ -37,7 +37,7 @@ class SwimLevels {
     // }
 
     static fetchAll() {
-        let sql = "SELECT * FROM swimLevels;";
+        let sql = "SELECT * FROM SwimLevels ORDER BY displayOrder;";
         return db.execute(sql);
     }
 }
