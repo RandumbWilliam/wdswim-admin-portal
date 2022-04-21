@@ -8,7 +8,7 @@ import {
     Form,
 } from "semantic-ui-react";
 import { PageContainer } from "../../styles/StyledElements";
-import { CustomTable, CustomButton, CustomDatePicker} from "./StyledClasses";
+import { CustomTable, CustomButton, CustomModal} from "./StyledClasses";
 import { useDispatch } from "react-redux";
 import { getClasses, addClasses} from "../../actions/classes";
 import { getSeasons} from "../../actions/seasons";
@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 import { isAuthenticated } from "../../helpers/auth";
 import DatePicker from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel"
+import { Dropdown } from "../../components/Form";
 
 const instructors = [
     { text: "John", value: "John" },
@@ -27,6 +28,12 @@ const seasons = [
 ];
 
 const initialState = {
+    seasonId:"",
+    numStudents:"",
+    instructorId:"",
+    lessonTypeId:"",
+    swimLevelId:"",
+    locationId:"",
 };
 
 
@@ -40,11 +47,6 @@ const Classes = () => {
     const navigate = useNavigate();
 
 
-    seasonsData.forEach(e => {
-        
-        seasons.push({text: e.seasonName, value: e.id})
-    });
-    
     const handleOpenModal = () => {
         setOpen(true);
     };
@@ -58,6 +60,13 @@ const Classes = () => {
         dispatch(addClasses(formData, navigate));
         setOpen(false);
     };
+
+    // const pushSeasonData = (seasonData) => {
+    //     seasonsData.forEach(e => {
+    //         console.log("hit")
+    //         seasons.push({text: e.seasonName, value: e.id})
+    //     });
+    // }
     
     useEffect(() => {
         dispatch(getClasses());
@@ -65,7 +74,9 @@ const Classes = () => {
     }, []);
 
     return (
-        <PageContainer>
+        <>
+        {seasonsData.length !== 0 && classesData.length !== 0 ? (
+            <PageContainer>
             <Container>
                 <CustomButton onClick={handleOpenModal}>Add Class</CustomButton>
                 {classesData ? (
@@ -115,8 +126,7 @@ const Classes = () => {
                     <div>No Data</div>
                 )}
             </Container>
-            <Modal
-                style={{ top: "10%" }}
+            <CustomModal
                 closeIcon
                 open={open}
                 onClose={() => setOpen(false)}
@@ -124,13 +134,14 @@ const Classes = () => {
                 <Header content="Add Admin Account" />
                 <Modal.Content>
                     <Form onSubmit={handleSubmit}>
-                        <Form.Select
-                            fluid
+                        <Dropdown
+                            options={seasonsData}
+                            text="seasonName"
+                            value="id"
                             name="seasonId"
                             label="Season"
                             onChange={handleChange}
-                            options={seasons}
-                            defaultValue={formData.stat}
+                            defaultValue={seasonsData[0]["id"]}
                         />
                         
                         <Form.Input
@@ -143,6 +154,7 @@ const Classes = () => {
                         />
 
                         <Form.Select
+                            required
                             fluid
                             name="instructorId"
                             label="Instructor"
@@ -152,6 +164,7 @@ const Classes = () => {
                         />
 
                         <Form.Select
+                            required
                             fluid
                             name="lessonTypeId"
                             label="Lesson Type"
@@ -161,6 +174,7 @@ const Classes = () => {
                         />
 
                         <Form.Select
+                            required
                             fluid
                             name="swimLevelId"
                             label="Swim Level"
@@ -170,6 +184,7 @@ const Classes = () => {
                         />
 
                         <Form.Select
+                            required
                             fluid
                             name="locationId"
                             label="Location"
@@ -196,8 +211,12 @@ const Classes = () => {
                         <Form.Button content='Submit'  />
                     </Form>
                 </Modal.Content>
-            </Modal>
+            </CustomModal>
         </PageContainer>
+        ) : (
+            <div>Loading</div>
+        )}
+        </>
     );
     
 };

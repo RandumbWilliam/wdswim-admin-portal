@@ -6,7 +6,6 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         font-family: 'Poppins', sans-serif;
-        font-size: 62.5%;s
     }
 
     p {
@@ -20,6 +19,10 @@ const GlobalStyle = createGlobalStyle`
             text-decoration: none;
             color: #000;
         }
+    }
+    
+    .ui.dimmer {
+        z-index: 9999 !important;
     }
 `;
 
