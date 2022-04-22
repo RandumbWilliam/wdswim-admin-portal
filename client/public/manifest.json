@@ -3,19 +3,19 @@
   "name": "WDSwim Admin Portal",
   "icons": [
     {
-      "src": "WDSwimLogo.ico",
+      "src": "WDCircle.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "logo-1.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "173x173"
     },
     {
-      "src": "logo512.png",
+      "src": "logo-1.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "173x173"
     }
   ],
   "start_url": ".",

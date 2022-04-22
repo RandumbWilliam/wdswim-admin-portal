@@ -135,7 +135,7 @@ const Classes = () => {
                 <Modal.Content>
                     <Form onSubmit={handleSubmit}>
                         <Dropdown
-                            options={seasonsData}
+                            options={seasonsData}   
                             text="seasonName"
                             value="id"
                             name="seasonId"
