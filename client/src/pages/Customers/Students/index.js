@@ -7,39 +7,27 @@ import {
     Header,
     Form,
 } from "semantic-ui-react";
-import { PageContainer } from "../../styles/StyledElements";
-import { CustomTable, CustomButton } from "./StyledUsers";
+import { PageContainer } from "../../../styles/StyledElements";
+import { CustomTable, CustomButton } from "./StyledStudents";
 import { useDispatch } from "react-redux";
-import { addAdminAccount, getAdminAccount } from "../../actions/users";
+import { getStudents, addStudents } from "../../../actions/students";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { isAuthenticated } from "../../helpers/auth";
-
-const status = [
-    { text: "Active", value: "A" },
-    { text: "Blocked", value: "Z" },
-];
-
-const levels = [
-    { text: "Noob", value: "0" },
-    { text: "God", value: "1" },
-];
 
 const initialState = {
     firstName: "",
     lastName: "",
-    email: "",
-    password: "",
-    stat: status[0].value,
-    level: levels[0].value,
-    createdBy: isAuthenticated().email,
+    gender: "",
+    dateOfBirth: "",
+    allergies: "",
+    allergiesActions: "",
+    notes: ""
 };
 
-
-const Users = () => {
+const Students = () => {
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState(initialState);
-    const adminData = useSelector((state) => state.users);
+    const studentsData = useSelector((state) => state.students);
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -54,56 +42,52 @@ const Users = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addAdminAccount(formData, navigate));
+        dispatch((formData, navigate));
         setOpen(false);
     };
-    
-    useEffect(() => {
-        dispatch(getAdminAccount());
+
+    console.log(studentsData)
+
+    useEffect(() => { 
+        dispatch(getStudents());
     }, []);
 
     return (
         <PageContainer>
             <Container>
-                <CustomButton onClick={handleOpenModal}>Add Admin</CustomButton>
-                {adminData ? (
+                <CustomButton onClick={handleOpenModal}>Add Students</CustomButton>
+                {studentsData ? (
                     <CustomTable>
                         <CustomTable.Header>
                             <CustomTable.Row>
                                 <CustomTable.HeaderCell>
-                                    Email
+                                    First Name
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
-                                    Status
+                                    Last Name
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
-                                    Account Level
+                                    Gender
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
-                                    Created by
-                                </CustomTable.HeaderCell>
-                                <CustomTable.HeaderCell>
-                                    Created On
+                                    Date of Birth
                                 </CustomTable.HeaderCell>
                             </CustomTable.Row>
                         </CustomTable.Header>
                         <CustomTable.Body>
-                            {adminData.map((item, index) => (
+                            {studentsData.map((item, index) => (
                                 <CustomTable.Row key={index}>
                                     <CustomTable.Cell>
-                                        {item.email}
+                                        {item.firstName}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.status}
+                                        {item.lastName}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.level}
+                                        {item.gender}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.createdBy}
-                                    </CustomTable.Cell>
-                                    <CustomTable.Cell>
-                                        {item.createdDate && item.createdDate.substring(0,10)}
+                                        {item.dateOfBirth && item.dateOfBirth.substring(0,10)}
                                     </CustomTable.Cell>
                                 </CustomTable.Row>
                             ))}
@@ -119,7 +103,7 @@ const Users = () => {
                 open={open}
                 onClose={() => setOpen(false)}
             >
-                <Header content="Add Admin Account" />
+                <Header content="Add Account Holders" />
                 <Modal.Content>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group widths="equal">
@@ -127,7 +111,7 @@ const Users = () => {
                                 required
                                 fluid
                                 name="firstName"
-                                label="First name"
+                                label="First Name"
                                 placeholder="First Name"
                                 onChange={handleChange}
                             />
@@ -135,43 +119,43 @@ const Users = () => {
                                 required
                                 fluid
                                 name="lastName"
-                                label="Last name"
+                                label="Last Name"
                                 placeholder="Last Name"
                                 onChange={handleChange}
                             />
                         </Form.Group>
-                        <Form.Input
-                            required
-                            fluid
-                            name="email"
-                            label="Email"
-                            placeholder="Email"
-                            onChange={handleChange}
-                        />
-                        <Form.Input
-                            required
-                            fluid
-                            name="password"
-                            label="Password"
-                            placeholder="Password"
-                            onChange={handleChange}
-                        />
                         <Form.Group widths="equal">
-                            <Form.Select
+                            <Form.Input
                                 fluid
-                                name="stat"
-                                label="Status"
+                                name="allergies"
+                                label="Allergies"
+                                placeholder="Allergies"
                                 onChange={handleChange}
-                                options={status}
-                                defaultValue={formData.stat}
                             />
-                            <Form.Select
+                            <Form.Input
                                 fluid
-                                name="level"
-                                label="Account Level"
-                                options={levels}
+                                name="allergiesActions"
+                                label="Allergies Actions"
+                                placeholder="Allergies Actions"
                                 onChange={handleChange}
-                                defaultValue={formData.level}
+                            />
+                        </Form.Group>
+                        <Form.Group widths="equal">
+                            <Form.Input
+                                required
+                                fluid
+                                name="address1"
+                                label="Address 1"
+                                placeholder="Address 1"
+                                onChange={handleChange}
+                            />
+                            <Form.Input
+                                required
+                                fluid
+                                name="address2"
+                                label="Address 2"
+                                placeholder="Address 2"
+                                onChange={handleChange}
                             />
                         </Form.Group>
                         <Form.Button content='Submit'  />
@@ -183,4 +167,4 @@ const Users = () => {
     
 };
 
-export default Users;
+export default Students;

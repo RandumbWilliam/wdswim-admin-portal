@@ -7,10 +7,10 @@ import {
     Header,
     Form,
 } from "semantic-ui-react";
-import { PageContainer } from "../../styles/StyledElements";
+import { PageContainer } from "../../../styles/StyledElements";
 import { CustomTable, CustomButton } from "./StyledAccountHolders";
 import { useDispatch } from "react-redux";
-import { addAccountHolders, getAccountHolder } from "../../actions/accountHolders";
+import { addAccountHolders, getAccountHolder } from "../../../actions/accountHolders";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -194,8 +194,8 @@ const AccountHolders = () => {
                             <Form.Input
                                 fluid
                                 name="emergencyPhone"
-                                label="emergency Phone"
-                                placeholder="emergency Phone"
+                                label="Emergency Phone #"
+                                placeholder="Emergency Phone #"
                                 onChange={handleChange}
                             />
                         </Form.Group>

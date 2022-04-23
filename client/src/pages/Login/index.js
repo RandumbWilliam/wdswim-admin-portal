@@ -32,7 +32,10 @@ const Login = () => {
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-        if (authData?.message) removeError();
+        if (authData?.message) {
+            removeError();
+            setLoading(false);
+        }
     };
 
     const handleSubmit = (e) => {
@@ -94,7 +97,8 @@ const Login = () => {
                                         />
                                     )}
                                     {authData?.message && (
-                                        <p style={{ color: "red" }}>
+                                        <p style={{fontWeight:"bold",
+                                         paddingTop: "1rem", color: "red" }}>
                                             {authData?.message}
                                         </p>
                                     )}

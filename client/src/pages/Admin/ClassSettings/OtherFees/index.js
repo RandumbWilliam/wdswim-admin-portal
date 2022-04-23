@@ -7,22 +7,23 @@ import {
     Header,
     Form,
 } from "semantic-ui-react";
-import { PageContainer } from "../../../styles/StyledElements";
-import { CustomTable, CustomButton } from "./StyledLessonType";
+import { PageContainer } from "../../../../styles/StyledElements";
+import { CustomTable, CustomButton } from "./StyledOtherFees";
 import { useDispatch } from "react-redux";
-import { addLessonType, getLessonType } from "../../../actions/classSettings/lessonType";
+import { addOtherFees, getOtherFees } from "../../../../actions/classSettings/otherFees";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const initialState = {
-    name: "",
+    description: "",
+    price: "",
     status: ""
 };
 
-const Discounts = () => {
+const OtherFees = () => {
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState(initialState);
-    const lessonTypeData = useSelector((state) => state.lessonType);
+    const otherFeesData = useSelector((state) => state.otherFees);
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -37,24 +38,27 @@ const Discounts = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addLessonType(formData, navigate));
+        dispatch(addOtherFees(formData, navigate));
         setOpen(false);
     };
 
     useEffect(() => {
-        dispatch(getLessonType());
+        dispatch(getOtherFees());
     }, []);
 
     return (
         <PageContainer>
             <Container>
-                <CustomButton onClick={handleOpenModal}>Add Lesson Type</CustomButton>
-                {lessonTypeData ? (
+                <CustomButton onClick={handleOpenModal}>Add Other Fees</CustomButton>
+                {otherFeesData ? (
                     <CustomTable>
                         <CustomTable.Header>
                             <CustomTable.Row>
                                 <CustomTable.HeaderCell>
-                                    Lesson Type
+                                    Description
+                                </CustomTable.HeaderCell>
+                                <CustomTable.HeaderCell>
+                                    Price
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
                                     Status
@@ -62,10 +66,13 @@ const Discounts = () => {
                             </CustomTable.Row>
                         </CustomTable.Header>
                         <CustomTable.Body>
-                            {lessonTypeData.map((item, index) => (
+                            {otherFeesData.map((item, index) => (
                                 <CustomTable.Row key={index}>
                                     <CustomTable.Cell>
-                                        {item.name}
+                                        {item.description}
+                                    </CustomTable.Cell>
+                                    <CustomTable.Cell>
+                                        {item.price}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
                                         {item.status}
@@ -75,7 +82,7 @@ const Discounts = () => {
                         </CustomTable.Body>
                     </CustomTable>
                 ) : (
-                    <div>No Data</div>
+                    <div>No Other Fees</div>
                 )}
             </Container>
             <Modal
@@ -84,16 +91,24 @@ const Discounts = () => {
                 open={open}
                 onClose={() => setOpen(false)}
             >
-                <Header content="Add Lesson Type" />
+                <Header content="Add Other Fees" />
                 <Modal.Content>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group widths="equal">
                             <Form.Input
                                 required
                                 fluid
-                                name="name"
-                                label="Lesson Type"
-                                placeholder="Lesson Type"
+                                name="description"
+                                label="Description"
+                                placeholder="Description"
+                                onChange={handleChange}
+                            />
+                            <Form.Input
+                                required
+                                fluid
+                                name="price"
+                                label="Price"
+                                placeholder="Price"
                                 onChange={handleChange}
                             />
                             <Form.Input
@@ -114,4 +129,4 @@ const Discounts = () => {
     
 };
 
-export default Discounts;
+export default OtherFees;

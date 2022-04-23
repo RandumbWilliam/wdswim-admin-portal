@@ -17,7 +17,7 @@ import {
     FaChartBar,
     FaCog,
 } from "react-icons/fa";
-import Logo from "../../assets/common/logo.png";
+import Logo from "../../assets/common/WDSwim From Justin.png";
 
 const Navbar = () => {
     const [collapsed, setCollapsed] = useState(true);
@@ -47,7 +47,9 @@ const Navbar = () => {
                     <CustomMenuItem>
                         <Link to="/accountHolders">Account Holder</Link>
                     </CustomMenuItem>
-                    <CustomMenuItem>Students</CustomMenuItem>
+                    <CustomMenuItem>
+                        <Link to="/students">Students</Link>
+                    </CustomMenuItem>
                 </CustomSubMenu>
                 <CustomSubMenu title="Classes" icon={<FaBook />}>
                     <CustomMenuItem>
@@ -86,7 +88,7 @@ const Navbar = () => {
                         <Link to="/users">Users</Link>
                     </CustomMenuItem>
                     <CustomSubMenu title="General">
-                        <CustomMenuItem>Camps</CustomMenuItem>
+                        <CustomMenuItem>Campus</CustomMenuItem>
                         <CustomMenuItem>
                             <Link to="/locations">Locations</Link>
                         </CustomMenuItem>

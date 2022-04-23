@@ -7,38 +7,39 @@ import {
     Header,
     Form,
 } from "semantic-ui-react";
-import { PageContainer } from "../../styles/StyledElements";
-import { CustomTable, CustomButton } from "./StyledLocations";
+import { PageContainer } from "../../../styles/StyledElements";
+import { CustomTable, CustomButton } from "./StyledUsers";
 import { useDispatch } from "react-redux";
-import { addLocations, getLocations } from "../../actions/locations";
-import { getCampus } from "../../actions/campus";
+import { addAdminAccount, getAdminAccount } from "../../../actions/users";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { isAuthenticated } from "../../../helpers/auth";
 
-const activeStatus = [
+const status = [
     { text: "Active", value: "A" },
-    { text: "Inactive", value: "Z" },
+    { text: "Blocked", value: "Z" },
 ];
-const campus = [
-    { text: 1, value: "A" },
-    { text: 2, value: "Z" },
+
+const levels = [
+    { text: "Noob", value: "0" },
+    { text: "God", value: "1" },
 ];
 
 const initialState = {
-    campusId: "",
-    locationName: "",
-    address: "",
-    mapURL: "",
-    activeStatus: ""
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    stat: status[0].value,
+    level: levels[0].value,
+    createdBy: isAuthenticated().email,
 };
 
-const Locations = () => {
+
+const Users = () => {
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState(initialState);
-    const locationsData = useSelector((state) => state.locations);
-    const campusData = useSelector((state) => state.campus);
-
-    console.log(campusData)
+    const adminData = useSelector((state) => state.users);
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -53,57 +54,56 @@ const Locations = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addLocations(formData, navigate));
+        dispatch(addAdminAccount(formData, navigate));
         setOpen(false);
     };
-
-    useEffect(() => { 
-        dispatch(getLocations());
-        dispatch(getCampus());
+    
+    useEffect(() => {
+        dispatch(getAdminAccount());
     }, []);
 
     return (
         <PageContainer>
             <Container>
-                <CustomButton onClick={handleOpenModal}>Add Locations</CustomButton>
-                {locationsData ? (
+                <CustomButton onClick={handleOpenModal}>Add Admin</CustomButton>
+                {adminData ? (
                     <CustomTable>
                         <CustomTable.Header>
                             <CustomTable.Row>
                                 <CustomTable.HeaderCell>
-                                    Campus
-                                </CustomTable.HeaderCell>
-                                <CustomTable.HeaderCell>
-                                    Location
-                                </CustomTable.HeaderCell>
-                                <CustomTable.HeaderCell>
-                                    Address
-                                </CustomTable.HeaderCell>
-                                <CustomTable.HeaderCell>
-                                    Map URL
+                                    Email
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
                                     Status
                                 </CustomTable.HeaderCell>
+                                <CustomTable.HeaderCell>
+                                    Account Level
+                                </CustomTable.HeaderCell>
+                                <CustomTable.HeaderCell>
+                                    Created by
+                                </CustomTable.HeaderCell>
+                                <CustomTable.HeaderCell>
+                                    Created On
+                                </CustomTable.HeaderCell>
                             </CustomTable.Row>
                         </CustomTable.Header>
                         <CustomTable.Body>
-                            {locationsData.map((item, index) => (
+                            {adminData.map((item, index) => (
                                 <CustomTable.Row key={index}>
                                     <CustomTable.Cell>
-                                        {item.campusName}
+                                        {item.email}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.locationName}
+                                        {item.status}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.address}
+                                        {item.level}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.mapURL}
+                                        {item.createdBy}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.activeStatus}
+                                        {item.createdDate && item.createdDate.substring(0,10)}
                                     </CustomTable.Cell>
                                 </CustomTable.Row>
                             ))}
@@ -119,42 +119,59 @@ const Locations = () => {
                 open={open}
                 onClose={() => setOpen(false)}
             >
-                <Header content="Add Locations" />
+                <Header content="Add Admin Account" />
                 <Modal.Content>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group widths="equal">
-                            <Form.Select
+                            <Form.Input
                                 required
                                 fluid
-                                name="campusId"
-                                label="Campus"
+                                name="firstName"
+                                label="First name"
+                                placeholder="First Name"
                                 onChange={handleChange}
-                                options={locationsData}
+                            />
+                            <Form.Input
+                                required
+                                fluid
+                                name="lastName"
+                                label="Last name"
+                                placeholder="Last Name"
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
+                        <Form.Input
+                            required
+                            fluid
+                            name="email"
+                            label="Email"
+                            placeholder="Email"
+                            onChange={handleChange}
+                        />
+                        <Form.Input
+                            required
+                            fluid
+                            name="password"
+                            label="Password"
+                            placeholder="Password"
+                            onChange={handleChange}
+                        />
+                        <Form.Group widths="equal">
+                            <Form.Select
+                                fluid
+                                name="stat"
+                                label="Status"
+                                onChange={handleChange}
+                                options={status}
                                 defaultValue={formData.stat}
                             />
-                            <Form.Input
-                                required
+                            <Form.Select
                                 fluid
-                                name="locationName"
-                                label="Location"
-                                placeholder="Location"
+                                name="level"
+                                label="Account Level"
+                                options={levels}
                                 onChange={handleChange}
-                            />
-                            <Form.Input
-                                required
-                                fluid
-                                name="address"
-                                label="Address"
-                                placeholder="Address"
-                                onChange={handleChange}
-                            />
-                            <Form.Input
-                                required
-                                fluid
-                                name="mapUrl"
-                                label="MapURL"
-                                placeholder="MapURL"
-                                onChange={handleChange}
+                                defaultValue={formData.level}
                             />
                         </Form.Group>
                         <Form.Button content='Submit'  />
@@ -166,4 +183,4 @@ const Locations = () => {
     
 };
 
-export default Locations;
+export default Users;

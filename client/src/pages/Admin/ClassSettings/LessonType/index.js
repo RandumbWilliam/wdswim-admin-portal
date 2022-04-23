@@ -7,28 +7,22 @@ import {
     Header,
     Form,
 } from "semantic-ui-react";
-import { PageContainer } from "../../../styles/StyledElements";
-import { CustomTable, CustomButton } from "./StyledSwimLevels";
+import { PageContainer } from "../../../../styles/StyledElements";
+import { CustomTable, CustomButton } from "./StyledLessonType";
 import { useDispatch } from "react-redux";
-import { addSwimLevels, getSwimLevels } from "../../../actions/classSettings/swimLevels";
+import { addLessonType, getLessonType } from "../../../../actions/classSettings/lessonType";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const activeStatus = [
-    { text: "Active", value: "A" },
-    { text: "Inactive", value: "Z" },
-];
-
 const initialState = {
     name: "",
-    status: "",
-    displayOrder: ""
+    status: ""
 };
 
-const SwimLevels = () => {
+const Discounts = () => {
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState(initialState);
-    const swimLevelsData = useSelector((state) => state.swimLevels);
+    const lessonTypeData = useSelector((state) => state.lessonType);
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -43,24 +37,24 @@ const SwimLevels = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addSwimLevels(formData, navigate));
+        dispatch(addLessonType(formData, navigate));
         setOpen(false);
     };
 
-    useEffect(() => { 
-        dispatch(getSwimLevels());
+    useEffect(() => {
+        dispatch(getLessonType());
     }, []);
 
     return (
         <PageContainer>
             <Container>
-                <CustomButton onClick={handleOpenModal}>Add Swim Levels</CustomButton>
-                {swimLevelsData ? (
+                <CustomButton onClick={handleOpenModal}>Add Lesson Type</CustomButton>
+                {lessonTypeData ? (
                     <CustomTable>
                         <CustomTable.Header>
                             <CustomTable.Row>
                                 <CustomTable.HeaderCell>
-                                    Swim Level
+                                    Lesson Type
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
                                     Status
@@ -68,7 +62,7 @@ const SwimLevels = () => {
                             </CustomTable.Row>
                         </CustomTable.Header>
                         <CustomTable.Body>
-                            {swimLevelsData.map((item, index) => (
+                            {lessonTypeData.map((item, index) => (
                                 <CustomTable.Row key={index}>
                                     <CustomTable.Cell>
                                         {item.name}
@@ -81,7 +75,7 @@ const SwimLevels = () => {
                         </CustomTable.Body>
                     </CustomTable>
                 ) : (
-                    <div>No Swim Levels</div>
+                    <div>No Data</div>
                 )}
             </Container>
             <Modal
@@ -90,7 +84,7 @@ const SwimLevels = () => {
                 open={open}
                 onClose={() => setOpen(false)}
             >
-                <Header content="Add Swim Levels" />
+                <Header content="Add Lesson Type" />
                 <Modal.Content>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group widths="equal">
@@ -98,8 +92,8 @@ const SwimLevels = () => {
                                 required
                                 fluid
                                 name="name"
-                                label="Swim Level Names"
-                                placeholder="SwimLevel"
+                                label="Lesson Type"
+                                placeholder="Lesson Type"
                                 onChange={handleChange}
                             />
                             <Form.Input
@@ -107,7 +101,7 @@ const SwimLevels = () => {
                                 fluid
                                 name="displayOrder"
                                 label="Display Order"
-                                placeholder="DisplayOrder"
+                                placeholder="Display Order"
                                 onChange={handleChange}
                             />
                         </Form.Group>
@@ -120,4 +114,4 @@ const SwimLevels = () => {
     
 };
 
-export default SwimLevels;
+export default Discounts;

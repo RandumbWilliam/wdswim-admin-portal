@@ -7,15 +7,17 @@ import Dashboard from "./pages/Dashboard";
 import Header from "./components/Header";
 import Login from "./pages/Login";
 import ProtectedRoutes from "./services/ProtectedRoutes";
-import Users from "./pages/Users";
-import Classes from "./pages/Classes";
-import Seasons from "./pages/Seasons";
-import Discounts from "./pages/ClassSettings/Discounts";
-import LessonType from "./pages/ClassSettings/LessonType";
-import Locations from "./pages/Locations";
-import SwimLevels from "./pages/ClassSettings/SwimLevels";
-import AccountHolders from "./pages/AccountHolders";
-import OtherFees from "./pages/ClassSettings/OtherFees";
+
+import Classes from         "./pages/Classes";
+import Seasons from         "./pages/Seasons";
+import Users from           "./pages/Admin/Users";
+import Discounts from       "./pages/Admin/ClassSettings/Discounts";
+import LessonType from      "./pages/Admin/ClassSettings/LessonType";
+import Locations from       "./pages/Admin/General/Locations";
+import SwimLevels from      "./pages/Admin/ClassSettings/SwimLevels";
+import OtherFees from       "./pages/Admin/ClassSettings/OtherFees";
+import AccountHolders from  "./pages/Customers/AccountHolders";
+import Students from        "./pages/Customers/Students";
 
 const App = () => {
     return (
@@ -77,6 +79,11 @@ const App = () => {
                                                 path="/accountHolders"
                                                 exact
                                                 element={<AccountHolders />}
+                                            />
+                                            <Route
+                                                path="/students"
+                                                exact
+                                                element={<Students />}
                                             />
                                             <Route
                                                 path="/otherFees"

@@ -7,23 +7,28 @@ import {
     Header,
     Form,
 } from "semantic-ui-react";
-import { PageContainer } from "../../../styles/StyledElements";
-import { CustomTable, CustomButton } from "./StyledOtherFees";
+import { PageContainer } from "../../../../styles/StyledElements";
+import { CustomTable, CustomButton } from "./StyledSwimLevels";
 import { useDispatch } from "react-redux";
-import { addOtherFees, getOtherFees } from "../../../actions/classSettings/otherFees";
+import { addSwimLevels, getSwimLevels } from "../../../../actions/classSettings/swimLevels";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+const activeStatus = [
+    { text: "Active", value: "A" },
+    { text: "Inactive", value: "Z" },
+];
+
 const initialState = {
-    description: "",
-    price: "",
-    status: ""
+    name: "",
+    status: "",
+    displayOrder: ""
 };
 
-const OtherFees = () => {
+const SwimLevels = () => {
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState(initialState);
-    const otherFeesData = useSelector((state) => state.otherFees);
+    const swimLevelsData = useSelector((state) => state.swimLevels);
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -38,27 +43,24 @@ const OtherFees = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addOtherFees(formData, navigate));
+        dispatch(addSwimLevels(formData, navigate));
         setOpen(false);
     };
 
-    useEffect(() => {
-        dispatch(getOtherFees());
+    useEffect(() => { 
+        dispatch(getSwimLevels());
     }, []);
 
     return (
         <PageContainer>
             <Container>
-                <CustomButton onClick={handleOpenModal}>Add Other Fees</CustomButton>
-                {otherFeesData ? (
+                <CustomButton onClick={handleOpenModal}>Add Swim Levels</CustomButton>
+                {swimLevelsData ? (
                     <CustomTable>
                         <CustomTable.Header>
                             <CustomTable.Row>
                                 <CustomTable.HeaderCell>
-                                    Description
-                                </CustomTable.HeaderCell>
-                                <CustomTable.HeaderCell>
-                                    Price
+                                    Swim Level
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
                                     Status
@@ -66,13 +68,10 @@ const OtherFees = () => {
                             </CustomTable.Row>
                         </CustomTable.Header>
                         <CustomTable.Body>
-                            {otherFeesData.map((item, index) => (
+                            {swimLevelsData.map((item, index) => (
                                 <CustomTable.Row key={index}>
                                     <CustomTable.Cell>
-                                        {item.description}
-                                    </CustomTable.Cell>
-                                    <CustomTable.Cell>
-                                        {item.price}
+                                        {item.name}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
                                         {item.status}
@@ -82,7 +81,7 @@ const OtherFees = () => {
                         </CustomTable.Body>
                     </CustomTable>
                 ) : (
-                    <div>No Other Fees</div>
+                    <div>No Swim Levels</div>
                 )}
             </Container>
             <Modal
@@ -91,24 +90,16 @@ const OtherFees = () => {
                 open={open}
                 onClose={() => setOpen(false)}
             >
-                <Header content="Add Other Fees" />
+                <Header content="Add Swim Levels" />
                 <Modal.Content>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group widths="equal">
                             <Form.Input
                                 required
                                 fluid
-                                name="description"
-                                label="Description"
-                                placeholder="Description"
-                                onChange={handleChange}
-                            />
-                            <Form.Input
-                                required
-                                fluid
-                                name="price"
-                                label="Price"
-                                placeholder="Price"
+                                name="name"
+                                label="Swim Level Names"
+                                placeholder="SwimLevel"
                                 onChange={handleChange}
                             />
                             <Form.Input
@@ -116,7 +107,7 @@ const OtherFees = () => {
                                 fluid
                                 name="displayOrder"
                                 label="Display Order"
-                                placeholder="Display Order"
+                                placeholder="DisplayOrder"
                                 onChange={handleChange}
                             />
                         </Form.Group>
@@ -129,4 +120,4 @@ const OtherFees = () => {
     
 };
 
-export default OtherFees;
+export default SwimLevels;

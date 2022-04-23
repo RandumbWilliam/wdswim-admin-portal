@@ -7,10 +7,10 @@ import {
     Header,
     Form,
 } from "semantic-ui-react";
-import { PageContainer } from "../../../styles/StyledElements";
+import { PageContainer } from "../../../../styles/StyledElements";
 import { CustomTable, CustomButton } from "./StyledDiscounts";
 import { useDispatch } from "react-redux";
-import { addDiscounts, getDiscounts } from "../../../actions/classSettings/discounts";
+import { addDiscounts, getDiscounts } from "../../../../actions/classSettings/discounts";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
