@@ -46,7 +46,6 @@ const Classes = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-
     const handleOpenModal = () => {
         setOpen(true);
     };
@@ -72,7 +71,7 @@ const Classes = () => {
         dispatch(getClasses());
         dispatch(getSeasons());
     }, []);
-
+    
     return (
         <>
         {seasonsData.length !== 0 && classesData.length !== 0 ? (
@@ -80,7 +79,7 @@ const Classes = () => {
             <Container>
                 <CustomButton onClick={handleOpenModal}>Add Class</CustomButton>
                 {classesData ? (
-                    <CustomTable>
+                    <CustomTable unstackable>
                         <CustomTable.Header>
                             <CustomTable.Row>
                                 <CustomTable.HeaderCell>

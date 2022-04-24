@@ -9,4 +9,5 @@ export const URLS = [
     { text: "Swim Levels", url: "/swimLevels" },
     { text: "Account Holders", url: "/accountHolders" },
     { text: "Other Fees", url: "/otherFees" },
+    { text: "Students Lists", url: "/students" }
 ];

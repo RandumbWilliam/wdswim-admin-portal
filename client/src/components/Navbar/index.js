@@ -31,7 +31,7 @@ const Navbar = () => {
             <SidebarHeader>
                 <LogoContainer>
                     <Link to="/">
-                        <img src={Logo} width="50px" />
+                        <img src={Logo} width={collapsed? "50px" : "100px"} />
                     </Link>
                 </LogoContainer>
             </SidebarHeader>
@@ -48,7 +48,7 @@ const Navbar = () => {
                         <Link to="/accountHolders">Account Holder</Link>
                     </CustomMenuItem>
                     <CustomMenuItem>
-                        <Link to="/students">Students</Link>
+                        <Link to="/students">Students List</Link>
                     </CustomMenuItem>
                 </CustomSubMenu>
                 <CustomSubMenu title="Classes" icon={<FaBook />}>

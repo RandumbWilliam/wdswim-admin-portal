@@ -7,7 +7,6 @@ const locationsReducer = (locationsData = [], action) => {
         case GET_LOCATIONS:
             return action.payload;
         case GET_CAMPUS:
-            console.log("hit2")
             return action.payload;
         default:
             return locationsData;
