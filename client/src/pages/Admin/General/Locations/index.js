@@ -29,8 +29,6 @@ const Locations = () => {
     const [formData, setFormData] = useState(initialState);
     const locationsData = useSelector((state) => state.locations);
     const campusData = useSelector((state) => state.campus);
-
-    console.log(campusData)
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -59,7 +57,7 @@ const Locations = () => {
             <Container>
                 <CustomButton onClick={handleOpenModal}>Add Locations</CustomButton>
                 {locationsData ? (
-                    <CustomTable>
+                    <CustomTable unstackable>
                         <CustomTable.Header>
                             <CustomTable.Row>
                                 <CustomTable.HeaderCell>

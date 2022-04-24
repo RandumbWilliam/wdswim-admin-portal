@@ -61,7 +61,7 @@ const Seasons = () => {
             <Container>
                 <CustomButton onClick={handleOpenModal}>Add Season</CustomButton>
                 {seasonData ? (
-                    <CustomTable>
+                    <CustomTable unstackable>
                         <CustomTable.Header>
                             <CustomTable.Row>
                                 <CustomTable.HeaderCell>
