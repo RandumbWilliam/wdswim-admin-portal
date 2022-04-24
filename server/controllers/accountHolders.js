@@ -41,3 +41,16 @@ export const getAccountHolder = async (req, res) => {
         res.status(500).json({ message: "Something went wrong. " });
     }
 };
+
+export const getOneAccountHolder = async (req, res) => {
+    try {
+
+        const { id } = req.body;
+        
+        const [data, _] = await AccountHolder.findOne(id);
+
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json({ message: "Something went wrong. " });
+    }
+};
