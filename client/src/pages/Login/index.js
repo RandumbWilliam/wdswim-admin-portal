@@ -25,8 +25,9 @@ const initialState = {
 
 const Login = () => {
     const [formData, setFormData] = useState(initialState);
-    const [loading, setLoading] = useState(false);
-    const authData = useSelector((state) => state.auth.authData);
+    const { authData, isLoading, isError, message } = useSelector(
+        (state) => state.auth
+    );
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -34,13 +35,11 @@ const Login = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
         if (authData?.message) {
             removeError();
-            setLoading(false);
         }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setLoading(true);
         dispatch(login(formData, navigate));
     };
 
@@ -82,7 +81,7 @@ const Login = () => {
                                         value={formData.password}
                                         placeholder="Password"
                                     />
-                                    {loading ? (
+                                    {isLoading ? (
                                         <StyledSignInButton
                                             content="Log In"
                                             primary
@@ -94,12 +93,23 @@ const Login = () => {
                                             content="Log In"
                                             type="submit"
                                             primary
+                                            disabled={
+                                                !formData.email ||
+                                                !formData.password
+                                                    ? true
+                                                    : false
+                                            }
                                         />
                                     )}
-                                    {authData?.message && (
-                                        <p style={{fontWeight:"bold",
-                                         paddingTop: "1rem", color: "red" }}>
-                                            {authData?.message}
+                                    {isError && (
+                                        <p
+                                            style={{
+                                                fontWeight: "bold",
+                                                paddingTop: "1rem",
+                                                color: "red",
+                                            }}
+                                        >
+                                            {message}
                                         </p>
                                     )}
                                 </StyledFormField>

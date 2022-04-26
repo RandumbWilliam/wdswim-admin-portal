@@ -1,4 +1,5 @@
 export const AUTH = "AUTH";
+export const AUTH_LOADING = "AUTH_LOADING";
 export const LOGOUT = "LOGOUT";
 export const ERROR = "ERROR";
 export const REMOVE_ERROR = "REMOVE_ERROR";
@@ -32,7 +33,6 @@ export const GET_ACCOUNT_HOLDERS = "GET_ACCOUNT_HOLDERS";
 
 export const ADD_OTHER_FEES = "ADD_OTHER_FEES";
 export const GET_OTHER_FEES = "GET_OTHER_FEES";
-
 
 export const ADD_STUDENTS = "ADD_STUDENTS";
 export const GET_STUDENTS = "GET_STUDENTS";
