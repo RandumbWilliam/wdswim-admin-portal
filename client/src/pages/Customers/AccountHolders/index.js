@@ -6,13 +6,15 @@ import {
     Icon,
     Header,
     Form,
+    Label,
 } from "semantic-ui-react";
 import { PageContainer } from "../../../styles/StyledElements";
 import { CustomTable, CustomButton } from "./StyledAccountHolders";
 import { useDispatch } from "react-redux";
-import { addAccountHolders, getAccountHolder } from "../../../actions/accountHolders";
+import { addAccountHolders, getAccountHolder, getOneAccountHolder } from "../../../actions/accountHolders";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Dropdown } from "../../../components/Form";
 
 const initialState = {
     contactName: "",
@@ -29,40 +31,72 @@ const initialState = {
     emergenctPhone: ""
 };
 
+const studentInitalState = {
+    accountHolderId: "",
+    firstName: "",
+    lastName: ""
+};
+
+const gender = [
+    { text: "Male", value: "male" },
+    { text: "Female", value: "female" },
+];
+
+
 const AccountHolders = () => {
+    const [studentsOpen, setStudentsOpen] = useState(false);
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState(initialState);
+    const [studentFormData, setStudentFormData] = useState(studentInitalState);
+    const [currentAccountHolder, setCurrentAccountHolder] = useState("");
     const accountHoldersData = useSelector((state) => state.accountHolders);
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
-    const handleOpenModal = () => {
+    const handleOpenModalAccountHodlers = () => {
         setOpen(true);
+    };
+
+    const handleOpenModalStudents = (accountId, accountName) => {
+        setStudentsOpen(true);
+        setStudentFormData({ ...studentFormData, accountHolderId: accountId });
+        setCurrentAccountHolder(accountName);
     };
     
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-    
+
+    const handleStudentChange = (e) => {
+        setStudentFormData({ ...studentFormData, [e.target.name]: e.target.value });
+    };
+
+    const handleStudentSubmit = (e) => {
+        console.log(studentFormData)
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(addAccountHolders(formData, navigate));
         setOpen(false);
     };
-
+    
     useEffect(() => { 
-        dispatch(getAccountHolder());
+        dispatch(getAccountHolder(), getOneAccountHolder());
     }, []);
 
     return (
         <PageContainer>
             <Container>
-                <CustomButton onClick={handleOpenModal}>Add Account Holders</CustomButton>
+                <CustomButton onClick={handleOpenModalAccountHodlers}>Add Account Holders</CustomButton>
                 {accountHoldersData ? (
-                    <CustomTable>
+                    <CustomTable unstackable>
                         <CustomTable.Header>
                             <CustomTable.Row>
+                                <CustomTable.HeaderCell>
+
+                                </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
                                     Contact Name
                                 </CustomTable.HeaderCell>
@@ -73,25 +107,7 @@ const AccountHolders = () => {
                                     Phone Number
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
-                                    Emegency Contact
-                                </CustomTable.HeaderCell>
-                                <CustomTable.HeaderCell>
-                                    Emergency Phone
-                                </CustomTable.HeaderCell>
-                                <CustomTable.HeaderCell>
                                     Address 1
-                                </CustomTable.HeaderCell>
-                                <CustomTable.HeaderCell>
-                                    Address 2
-                                </CustomTable.HeaderCell>
-                                <CustomTable.HeaderCell>
-                                    City
-                                </CustomTable.HeaderCell>
-                                <CustomTable.HeaderCell>
-                                    Province
-                                </CustomTable.HeaderCell>
-                                <CustomTable.HeaderCell>
-                                    Postal Code
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
                                     Date Created
@@ -105,6 +121,12 @@ const AccountHolders = () => {
                             {accountHoldersData.map((item, index) => (
                                 <CustomTable.Row key={index}>
                                     <CustomTable.Cell>
+                                        <CustomButton 
+                                            onClick={() => {handleOpenModalStudents(item.id, item.contactName)}}>
+                                            Add Student 
+                                        </CustomButton> 
+                                    </CustomTable.Cell>
+                                    <CustomTable.Cell>
                                         {item.contactName}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
@@ -114,28 +136,10 @@ const AccountHolders = () => {
                                         {item.phoneNumber}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.emergencyContact}
-                                    </CustomTable.Cell>
-                                    <CustomTable.Cell>
-                                        {item.emergenctPhone}
-                                    </CustomTable.Cell>
-                                    <CustomTable.Cell>
                                         {item.address1}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.address2}
-                                    </CustomTable.Cell>
-                                    <CustomTable.Cell>
-                                        {item.city}
-                                    </CustomTable.Cell>
-                                    <CustomTable.Cell>
-                                        {item.province}
-                                    </CustomTable.Cell>
-                                    <CustomTable.Cell>
-                                        {item.postalCode}
-                                    </CustomTable.Cell>
-                                    <CustomTable.Cell>
-                                        {item.dateCreated}
+                                        {item.dateCreated && item.dateCreated.substring(0,10)}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
                                         {item.notes}
@@ -148,6 +152,73 @@ const AccountHolders = () => {
                     <div>No Account Holders</div>
                 )}
             </Container>
+            <Modal
+                style={{ top: "10%" }}
+                closeIcon
+                open={studentsOpen}
+                onClose={() => setStudentsOpen(false)}
+            >
+                <Header>Add students to <strong>{currentAccountHolder}</strong></Header>
+                <Modal.Content>
+                    <Form onSubmit={handleStudentSubmit}>
+                        <Form.Group widths="equal">
+                            <Form.Input
+                                required
+                                fluid
+                                name="firstName"
+                                label="First Name"
+                                placeholder="First Name"
+                                onChange={handleStudentChange}
+                            />
+                            <Form.Input
+                                required
+                                fluid
+                                name="lastName"
+                                label="Last Name"
+                                placeholder="Last Name"
+                                onChange={handleStudentChange}
+                            />
+                            <Dropdown
+                                options={gender}
+                                text="text"
+                                value="value"
+                                name="gender"
+                                label="Gender"
+                                onChange={handleStudentChange}
+                                defaultValue={gender[0]["value"]}
+                            />
+                        </Form.Group>
+                        <Form.Group widths="equal">
+                            <Form.Input
+                                fluid
+                                name="allergies"
+                                label="Allergies"
+                                placeholder="Allergies"
+                                onChange={handleStudentChange}
+                            />
+                            <Form.Input
+                                fluid
+                                name="allergiesActions"
+                                label="Allergies Actions"
+                                placeholder="Allergies Actions"
+                                onChange={handleStudentChange}
+                            />
+                        </Form.Group>
+                        <Form.Group widths="equal">
+                            <Form.Input
+                                fluid
+                                name="notes"
+                                label="Notes"
+                                placeholder="Notes"
+                                onChange={handleStudentChange}
+                            />
+                        </Form.Group>
+                        <Form.Button content='Submit'  />
+                    </Form>
+                </Modal.Content>
+            </Modal>
+
+
             <Modal
                 style={{ top: "10%" }}
                 closeIcon

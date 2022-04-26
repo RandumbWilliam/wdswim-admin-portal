@@ -67,7 +67,7 @@ const Users = () => {
             <Container>
                 <CustomButton onClick={handleOpenModal}>Add Admin</CustomButton>
                 {adminData ? (
-                    <CustomTable>
+                    <CustomTable unstackable>
                         <CustomTable.Header>
                             <CustomTable.Row>
                                 <CustomTable.HeaderCell>

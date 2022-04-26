@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Table, Button, Modal, Form, Dropdown } from "semantic-ui-react";
 
-export const CustomTable = styled(Table)``;
+export const CustomTable = styled(Table)`unstackable`;
 
 export const CustomButton = styled(Button)``;
 

@@ -56,7 +56,7 @@ const SwimLevels = () => {
             <Container>
                 <CustomButton onClick={handleOpenModal}>Add Swim Levels</CustomButton>
                 {swimLevelsData ? (
-                    <CustomTable>
+                    <CustomTable unstackable>
                         <CustomTable.Header>
                             <CustomTable.Row>
                                 <CustomTable.HeaderCell>

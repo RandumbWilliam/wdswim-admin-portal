@@ -50,7 +50,7 @@ const Discounts = () => {
             <Container>
                 <CustomButton onClick={handleOpenModal}>Add Lesson Type</CustomButton>
                 {lessonTypeData ? (
-                    <CustomTable>
+                    <CustomTable unstackable>
                         <CustomTable.Header>
                             <CustomTable.Row>
                                 <CustomTable.HeaderCell>

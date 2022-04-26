@@ -11,7 +11,7 @@ import { PageContainer } from "../../../styles/StyledElements";
 import { CustomTable, CustomButton } from "./StyledStudents";
 import { useDispatch } from "react-redux";
 import { getStudents, addStudents } from "../../../actions/students";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const initialState = {
@@ -23,6 +23,12 @@ const initialState = {
     allergiesActions: "",
     notes: ""
 };
+
+const gender = [
+    { text: "male", value: "male" },
+    { text: "female", value: "female" },
+];
+
 
 const Students = () => {
     const [open, setOpen] = useState(false);
@@ -46,7 +52,6 @@ const Students = () => {
         setOpen(false);
     };
 
-    console.log(studentsData)
 
     useEffect(() => { 
         dispatch(getStudents());
@@ -55,9 +60,9 @@ const Students = () => {
     return (
         <PageContainer>
             <Container>
-                <CustomButton onClick={handleOpenModal}>Add Students</CustomButton>
+                <CustomButton><Link to="/accountHolders">Add Students</Link></CustomButton>
                 {studentsData ? (
-                    <CustomTable>
+                    <CustomTable unstackable>
                         <CustomTable.Header>
                             <CustomTable.Row>
                                 <CustomTable.HeaderCell>
@@ -141,14 +146,7 @@ const Students = () => {
                             />
                         </Form.Group>
                         <Form.Group widths="equal">
-                            <Form.Input
-                                required
-                                fluid
-                                name="address1"
-                                label="Address 1"
-                                placeholder="Address 1"
-                                onChange={handleChange}
-                            />
+                            
                             <Form.Input
                                 required
                                 fluid

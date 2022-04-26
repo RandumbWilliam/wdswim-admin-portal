@@ -36,6 +36,7 @@ export const getLessonType = () => API.get("/classSettings/lessonType/getLessonT
 
 // ACCOUNT HOLDERS
 export const addAccountHolders = (formData) => API.post("/accountHolder/addAccountHolders", formData);
+export const getOneAccountHolder = (formData) => API.post("/accountHolder/getOneAccountHolder", formData);
 export const getAccountHolder = () => API.get("/accountHolders/getAccountHolder");
 
 // LOCATIONS
