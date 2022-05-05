@@ -21,11 +21,10 @@ export const getAccountHolder = () => async (dispatch) => {
     }
 };
 
-export const getOneAccountHolder = (formData, navigate) => async (dispatch) => {
+export const getOneAccountHolder = (currentAccount, navigate) => async (dispatch) => {
     try {
-        const { data } = await api.getOneAccountHolder(formData);
+        const { data } = await api.getOneAccountHolder(currentAccount);
 
-        console.log(data)
 
         dispatch({ type: GET_ONE_ACCOUNT_HOLDERS, payload: data });
     } catch (error) {

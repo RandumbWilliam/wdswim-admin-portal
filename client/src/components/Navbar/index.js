@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, SidebarHeader } from "@randumbwilliam/react-pro-sidebar";
+import { Menu, SidebarFooter, SidebarHeader } from "@randumbwilliam/react-pro-sidebar";
 import {
     CustomProSidebar,
     CustomMenuItem,
@@ -52,10 +52,27 @@ const Navbar = () => {
                     </CustomMenuItem>
                 </CustomSubMenu>
                 <CustomSubMenu title="Classes" icon={<FaBook />}>
-                    <CustomMenuItem>
-                        <Link to="/classes">Classes</Link>
-                    </CustomMenuItem>
+                    <CustomSubMenu title="Class Settings">
+                        <CustomMenuItem>
+                            <Link to="/seasons">Seasons</Link>
+                        </CustomMenuItem>
+                        <CustomMenuItem>
+                            <Link to="/lessonType">Lesson Types</Link>
+                        </CustomMenuItem>
+                        <CustomMenuItem> 
+                            <Link to="/discounts">Discounts</Link>
+                        </CustomMenuItem>
+                        <CustomMenuItem>
+                            <Link to="/swimLevels">Swimming Levels</Link>
+                        </CustomMenuItem>
+                        <CustomMenuItem>
+                            <Link to="/otherFees">Other Fees</Link>
+                        </CustomMenuItem>
+                    </CustomSubMenu>
                     <CustomMenuItem>Set Up Classes</CustomMenuItem>
+                    <CustomMenuItem>
+                        <Link to="/classes">Classes Management</Link>
+                    </CustomMenuItem>
                 </CustomSubMenu>
                 <CustomSubMenu title="Employees" icon={<FaUsers />}>
                     <CustomMenuItem>Employees</CustomMenuItem>
@@ -66,37 +83,22 @@ const Navbar = () => {
                     <CustomMenuItem>Student Store Credit</CustomMenuItem>
                 </CustomSubMenu>
                 <CustomSubMenu title="Admin" icon={<FaCog />}>
-                    <CustomSubMenu title="Class Settings">
-                        <CustomMenuItem>
-                            <Link to="/lessonType">Lesson Types</Link>
-                        </CustomMenuItem>
-                        <CustomMenuItem>Pricing List</CustomMenuItem>
-                        <CustomMenuItem> 
-                            <Link to="/discounts">Discounts</Link>
-                        </CustomMenuItem>
-                        <CustomMenuItem>
-                            <Link to="/otherFees">Other Fees</Link>
-                        </CustomMenuItem>
-                        <CustomMenuItem>
-                            <Link to="/swimLevels">Swimming Levels</Link>
-                        </CustomMenuItem>
-                    </CustomSubMenu>
                     <CustomMenuItem>
-                        <Link to="/seasons">Seasons</Link>
+                        <Link to="/campus">Campus</Link>
                     </CustomMenuItem>
                     <CustomMenuItem>
                         <Link to="/users">Users</Link>
                     </CustomMenuItem>
-                    <CustomSubMenu title="General">
-                        <CustomMenuItem>Campus</CustomMenuItem>
-                        <CustomMenuItem>
-                            <Link to="/locations">Locations</Link>
-                        </CustomMenuItem>
-                    </CustomSubMenu>
+                    <CustomMenuItem>
+                        <Link to="/locations">Locations</Link>
+                    </CustomMenuItem>
                     <CustomMenuItem>Accouncements</CustomMenuItem>
                     <CustomMenuItem>Web Documents</CustomMenuItem>
                 </CustomSubMenu>
             </Menu>
+            <SidebarFooter>
+                
+            </SidebarFooter>
         </CustomProSidebar>
     );
 };

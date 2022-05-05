@@ -1,6 +1,8 @@
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
+import auth from "./middleware/auth.js";
+
 import authRoutes from "./routes/auth.js";
 import usersRoutes from "./routes/users.js";
 import discountsRoutes from "./routes/classSettings/discounts.js";
@@ -24,18 +26,18 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/auth", authRoutes);
-app.use("/users", usersRoutes);
-app.use("/classSettings/discounts", discountsRoutes);
-app.use("/classSettings/lessonType", lessonTypeRoutes);
-app.use("/classes", classesRoutes);
-app.use("/accountHolders", accountHoldersRoutes);
-app.use("/classSettings/swimLevels", swimLevelsRoutes);
-app.use("/classSettings/otherFees", otherFeesRoutes);
-app.use("/classSettings/pricing", pricingRoutes);
-app.use("/locations", locationsRoutes);
-app.use("/seasons", seasonsRoutes);
-app.use("/students", studentsRoutes);
-app.use("/campus", campusRoutes);
+app.use("/users", auth, usersRoutes);
+app.use("/classSettings/discounts", auth, discountsRoutes);
+app.use("/classSettings/lessonType", auth,lessonTypeRoutes);
+app.use("/classes", auth, classesRoutes);
+app.use("/accountHolders", auth, accountHoldersRoutes);
+app.use("/classSettings/swimLevels", auth, swimLevelsRoutes);
+app.use("/classSettings/otherFees", auth, otherFeesRoutes);
+app.use("/classSettings/pricing", auth, pricingRoutes);
+app.use("/locations", auth, locationsRoutes);
+app.use("/seasons", auth, seasonsRoutes);
+app.use("/students", auth, studentsRoutes);
+app.use("/campus", auth, campusRoutes);
 
 app.use((err, req, res, next) => {
     console.log(err.stack);

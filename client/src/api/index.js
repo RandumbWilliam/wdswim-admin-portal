@@ -1,11 +1,13 @@
 import axios from "axios";
+import { getCookie } from "../helpers/cookies";
+import { TOKEN } from "../constants/keys"
 
 const API = axios.create({ baseURL: "http://localhost:5000" });
 
 API.interceptors.request.use((req) => {
-    if (localStorage.getItem("profile")) {
+    if (localStorage.getItem("user")) {
         req.headers.Authorization = `Bearer ${
-            JSON.parse(localStorage.getItem("profile")).token
+            getCookie(TOKEN)
         }`;
     }
 
@@ -35,8 +37,8 @@ export const addLessonType = (formData) => API.post("/classSettings/lessonType/a
 export const getLessonType = () => API.get("/classSettings/lessonType/getLessonType");
 
 // ACCOUNT HOLDERS
-export const addAccountHolders = (formData) => API.post("/accountHolder/addAccountHolders", formData);
-export const getOneAccountHolder = (formData) => API.post("/accountHolder/getOneAccountHolder", formData);
+export const addAccountHolders = (formData) => API.post("/accountHolders/addAccountHolders", formData);
+export const getOneAccountHolder = (formData) => API.post("/accountHolders/getOneAccountHolder", formData);
 export const getAccountHolder = () => API.get("/accountHolders/getAccountHolder");
 
 // LOCATIONS

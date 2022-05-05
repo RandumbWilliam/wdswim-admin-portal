@@ -15,6 +15,9 @@ import { addAccountHolders, getAccountHolder, getOneAccountHolder } from "../../
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Dropdown } from "../../../components/Form";
+import {
+    FaPen
+} from "react-icons/fa";
 
 const initialState = {
     contactName: "",
@@ -58,10 +61,8 @@ const AccountHolders = () => {
         setOpen(true);
     };
 
-    const handleOpenModalStudents = (accountId, accountName) => {
-        setStudentsOpen(true);
-        setStudentFormData({ ...studentFormData, accountHolderId: accountId });
-        setCurrentAccountHolder(accountName);
+    const openAccountInfo = (accountId) => {
+        navigate('/accountInfo', {state : {accountId: accountId}})
     };
     
     const handleChange = (e) => {
@@ -73,7 +74,6 @@ const AccountHolders = () => {
     };
 
     const handleStudentSubmit = (e) => {
-        console.log(studentFormData)
     };
 
     const handleSubmit = (e) => {
@@ -90,6 +90,10 @@ const AccountHolders = () => {
         <PageContainer>
             <Container>
                 <CustomButton onClick={handleOpenModalAccountHodlers}>Add Account Holders</CustomButton>
+                {/* <CustomButton 
+                    onClick={() => {handleOpenModalStudents(item.id, item.contactName)}}>
+                    Add Student 
+                </CustomButton>  */}
                 {accountHoldersData ? (
                     <CustomTable unstackable>
                         <CustomTable.Header>
@@ -98,22 +102,28 @@ const AccountHolders = () => {
 
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
-                                    Contact Name
+                                    AccountID
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
-                                    Email
+                                    Contact Name
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
                                     Phone Number
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
-                                    Address 1
+                                    Email
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
-                                    Date Created
+                                    Address
                                 </CustomTable.HeaderCell>
                                 <CustomTable.HeaderCell>
-                                    Notes
+                                    City
+                                </CustomTable.HeaderCell>
+                                <CustomTable.HeaderCell>
+                                    Postal Code
+                                </CustomTable.HeaderCell>
+                                <CustomTable.HeaderCell>
+                                    Registration Date
                                 </CustomTable.HeaderCell>
                             </CustomTable.Row>
                         </CustomTable.Header>
@@ -122,27 +132,33 @@ const AccountHolders = () => {
                                 <CustomTable.Row key={index}>
                                     <CustomTable.Cell>
                                         <CustomButton 
-                                            onClick={() => {handleOpenModalStudents(item.id, item.contactName)}}>
-                                            Add Student 
-                                        </CustomButton> 
+                                            onClick={() => {openAccountInfo(item.id)}}>
+                                            <FaPen />
+                                        </CustomButton>
+                                    </CustomTable.Cell>
+                                    <CustomTable.Cell>
+                                        {item.id}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
                                         {item.contactName}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.email}
+                                        {item.phoneNumber}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.phoneNumber}
+                                        {item.email}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
                                         {item.address1}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.dateCreated && item.dateCreated.substring(0,10)}
+                                        {item.city}
                                     </CustomTable.Cell>
                                     <CustomTable.Cell>
-                                        {item.notes}
+                                        {item.postalCode}
+                                    </CustomTable.Cell>
+                                    <CustomTable.Cell>
+                                        {item.dateCreated && item.dateCreated.substring(0,10)}
                                     </CustomTable.Cell>
                                 </CustomTable.Row>
                             ))}

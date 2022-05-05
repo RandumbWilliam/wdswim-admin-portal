@@ -44,8 +44,8 @@ export const getAccountHolder = async (req, res) => {
 
 export const getOneAccountHolder = async (req, res) => {
     try {
-
         const { id } = req.body;
+        console.log(req.body)
         
         const [data, _] = await AccountHolder.findOne(id);
 
